@@ -21,7 +21,7 @@
                     <h1>CRIAR CONTA</h1>
                 </div>
                 <section class="container">
-                    <form name="frmRegister" action="insert">
+                    <form name="frmRegister" action="insert-user" method="post">
                         <div>
                             <div class="mb-3">
                                 <label for="inputName" class="form-label">Nome Completo</label>

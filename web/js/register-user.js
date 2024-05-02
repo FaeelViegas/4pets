@@ -72,7 +72,6 @@ fetch('./users-data')
     })
     .then(data => {
         users = data;
-        console.log(users)
     })
     .catch(error => {
         console.error(error);
