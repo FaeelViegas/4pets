@@ -15,7 +15,7 @@
     <body>
         <main>
             <a href="./login-page">LOGIN</a>
-            <a href="./register-user">CADASTRO DE USUARIO</a>
+            <a href="./register-page">CADASTRO DE USUARIO</a>
         </main>
     </body>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
