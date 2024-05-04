@@ -13,7 +13,7 @@ public class ProductDAO {
 
     public List<ProductDTO> searchProduct(String search) {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT * FROM products WHERE name = ? OR description = ?";
+        String sql = "SELECT * FROM products LIKE name = ? OR  LIKE description = ?";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;

@@ -19,7 +19,7 @@ function validate() {
         frmRegister.cpf.focus();
         return false;
     } else if (users && users.some(item => item.cpf === cpf)) {
-        errorToast(text = 'Cpf de usuário já possui um cadastro!');
+        errorToast(text = 'CPF de usuário já possui um cadastro!');
         frmRegister.cpf.focus();
         return false;
     } else if (phone.trim() === "") {
@@ -46,7 +46,7 @@ function validate() {
         warningToast(text = 'Preencha o campo Nome de Usuario!');
         frmRegister.user.focus();
         return false;
-    } else if (users && users.some(item => item.user === user)) {
+    } else if (users && users.some(item => item.userName === user)) {
         errorToast(text = 'Esse nome de usuario ja possui um cadastro!');
         frmRegister.user.focus();
         return false;

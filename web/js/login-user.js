@@ -11,7 +11,7 @@ function validate() {
         frmLogin.password.focus();
         return false;
     } else {
-        let matchedUser = users.find(item => item.user === user && item.password === password);
+        let matchedUser = users.find(item => item.userName === user && item.password === password);
         if (!matchedUser) {
             errorToast(text = 'Nome de Usuário ou senha incorretos!');
             frmLogin.user.focus();
