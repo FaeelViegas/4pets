@@ -1,0 +1,8 @@
+@media(min-width: 991px) {
+    .container-products{
+        margin-top: 15px;
+        padding-left: 15%;
+        padding-right: 15%;
+        gap: 15px;
+    }
+}

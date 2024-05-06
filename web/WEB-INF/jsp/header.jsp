@@ -14,12 +14,14 @@
             <div class="container-header d-flex">
                 <div class="logo-container">
                     <a href="./home">
-                        <img src="./assets/cesta.gif" alt="logo">
+                        <img src="" alt="logo">
                     </a>
                 </div>
                 <div class="input-container">
-                    <input type="text" class="form-control" id="inputSearch" name="search">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <form class="d-flex" action="search-product" method="get">
+                        <input type="text" class="form-control" id="inputSearch" name="search">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
                 </div>
                 <div class="user-container">
                     <button id="user-button-open"><i class="fa-solid fa-user"></i></button>
@@ -78,4 +80,5 @@
         </header>
     </body>
     <script src="./js/shoppingCart.js"></script>
+
     </html>
