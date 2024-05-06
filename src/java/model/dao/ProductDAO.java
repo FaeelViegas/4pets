@@ -13,7 +13,7 @@ public class ProductDAO {
 
     public List<ProductDTO> searchProduct(String search) {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT * FROM products LIKE name = ? OR  LIKE description = ?";
+        String sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
@@ -24,11 +24,11 @@ public class ProductDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 ProductDTO objProduct = new ProductDTO();
-                objProduct.setIdProduct(rs.getInt("id_produto"));
-                objProduct.setName(rs.getString("nome"));
-                objProduct.setPrice(rs.getFloat("valor"));
+                objProduct.setIdProduct(rs.getInt("id_product"));
+                objProduct.setName(rs.getString("name"));
+                objProduct.setPrice(rs.getFloat("value"));
                 objProduct.setDescription(rs.getString("description"));
-                objProduct.setCategoryId(rs.getInt("categoria_id"));
+                objProduct.setCategoryId(rs.getInt("category_id"));
                 objProduct.setSellerId(rs.getInt("seller_id"));
                 products.add(objProduct);
             }
