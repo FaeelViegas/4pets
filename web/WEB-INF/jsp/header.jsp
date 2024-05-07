@@ -18,7 +18,7 @@
             <div class="container-header d-flex">
                 <div class="logo-container">
                     <a href="./home">
-                        <img src="" alt="logo">
+                        <img src="./assets/logo-header.png" alt="logo">
                     </a>
                 </div>
                 <div class="input-container">

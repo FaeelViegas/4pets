@@ -33,7 +33,8 @@
     }
 
     .box {
-        display: none;
+        visibility: hidden;
+        display: flex;
         width: 140px;
         height: 90px;
         left: -45px;
@@ -43,10 +44,13 @@
         padding: 10px;
         align-content: center;
         backdrop-filter: blur(6px);
+        flex-wrap: wrap;
+        justify-content: center;
+        
     }
 
     .user-container:hover .box {
-        display: block;
+        visibility: visible;
     }
 
     .user-container .box ul {
