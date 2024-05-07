@@ -9,13 +9,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.CategoryDTO;
 import model.bean.ProductDTO;
+import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search"})
+@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys"})
 public class ProductController extends HttpServlet {
 
+    Gson gson = new Gson();
     ProductDTO objProduct = new ProductDTO();
+    CategoryDAO objCategoryDao = new CategoryDAO();
     ProductDAO objProductDao = new ProductDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,11 +38,26 @@ public class ProductController extends HttpServlet {
         processRequest(request, response);
         String url = request.getServletPath();
         if (url.equals("/search")) {
-            String search = "%"+request.getParameter("search")+"%";
-            List<ProductDTO> products = objProductDao.searchProduct(search);
-            Gson gson = new Gson();
-            String json = gson.toJson(products);
-            response.setContentType("aplication/json");
+            String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+            if (search.equals("")) {
+                List<ProductDTO> products = objProductDao.searchCategory(Integer.parseInt(request.getParameter("category")));
+                String json = gson.toJson(products);
+                response.setContentType("aplication/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            } else {
+                search = "%" + search + "%";
+                List<ProductDTO> products = objProductDao.searchProduct(search);
+                String json = gson.toJson(products);
+                response.setContentType("aplication/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            }
+        } else if (url.equals("/list-categorys")) {
+            List<CategoryDTO> categorys = objCategoryDao.read();
+            String json = gson.toJson(categorys);
+
+            response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
         }

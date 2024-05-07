@@ -9,12 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.CategoryDTO;
 import model.bean.UserDTO;
+import model.dao.CategoryDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user","/login-user"})
+@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user","/home"})
 public class UserController extends HttpServlet {
 
+    Gson gson = new Gson();
     UserDAO objUserDao = new UserDAO();
     UserDTO objUser = new UserDTO();
 
@@ -29,7 +32,11 @@ public class UserController extends HttpServlet {
             String path = "/WEB-INF/jsp/register-user.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
-        }else if(url.equals("/login-user")){
+        } else if (url.equals("/login-user")) {
+            String path = "/WEB-INF/jsp/index.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+            dispatcher.forward(request, response);
+        }else if(url.equals("/home")){
             String path = "/WEB-INF/jsp/index.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
@@ -43,8 +50,6 @@ public class UserController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/users-data")) {
             List<UserDTO> users = objUserDao.read();
-
-            Gson gson = new Gson();
             String json = gson.toJson(users);
 
             response.setContentType("application/json");
