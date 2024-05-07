@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const productSearch = urlParams.get('search');
-
+const productCategory = urlParams.get('category');
 function createProductCard(product) {
     const card = document.createElement('div');
     card.classList.add('product-card');
@@ -40,7 +40,7 @@ function loadProducts(products) {
 }
 
 //Acesso aos dados da api que retorna a lista com base no input
-function getProductData(productSearch) {
+function getProductDataByName(productSearch) {
     fetch('./search?search=' + productSearch)
         .then(response => {
             if (!response.ok) {
@@ -55,4 +55,23 @@ function getProductData(productSearch) {
             console.error('Erro:', error);
         });
 }
-getProductData(productSearch);
+function getProductDataByCategory(productCategory) {
+    fetch('./search?category=' + productCategory)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao obter os dados do produto');
+            }
+            return response.json();
+        })
+        .then(data => {
+            loadProducts(data);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
+if (productSearch !== "") {
+    getProductDataByName(productSearch);
+} else {
+    getProductDataByCategory(productCategory);
+}
