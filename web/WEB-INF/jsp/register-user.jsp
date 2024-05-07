@@ -10,54 +10,63 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./styles/toast.css">
+        <link rel="stylesheet" href="./styles/register-user.css">
         <title>Cadastro</title>
     </head>
 
     <body>
+        <header>
+            <div class="image-home">
+                <a href="./home">
+                    <img src="./assets/logo-header.png" alt="forpets">
+                </a>
+            </div>
+        </header>
         <main>
-            <main>
-                <div class="notifications"></div>
-                <div>
-                    <h1>CRIAR CONTA</h1>
-                </div>
-                <section class="container">
-                    <form name="frmRegister" action="insert-user" method="post">
-                        <div>
-                            <div class="mb-3">
-                                <label for="inputName" class="form-label">Nome Completo</label>
-                                <input type="text" class="form-control" id="inputName" name="name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputCpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" id="inputCpf" name="cpf" maxlength="14"
-                                    onkeyup="handleCpf(event)">
-                            </div>
+            <div class="notifications"></div>
+            <div>
+                <h1>CRIAR CONTA</h1>
+            </div>
+            <section class="container">
+                <form name="frmRegister" action="insert-user" method="post">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="inputName" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="inputName" name="name">
                         </div>
-                        <div>
-                            <div class="mb-3">
-                                <label for="inputPhone" class="form-label">Telefone</label>
-                                <input type="tel" class="form-control" id="inputPhone" name="phone" maxlength="15"
-                                    onkeyup="handlePhone(event)">
-                            </div>
-                            <div class=" mb-3">
-                                <label for="inputDate" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="inputDate" name="date">
-                            </div>
+                        <div class="col mb-3">
+                            <label for="inputCpf" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="inputCpf" name="cpf" maxlength="14"
+                                onkeyup="handleCpf(event)">
                         </div>
-                        <div>
-                            <div class="mb-3">
-                                <label for="inputUser" class="form-label">Nome de Usuario</label>
-                                <input type="text" class="form-control" id="inputUser" name="user">
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputPassword" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="inputPassword" name="password">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="inputPhone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="inputPhone" name="phone" maxlength="15"
+                                onkeyup="handlePhone(event)">
                         </div>
-                        <input type="button" value="Cadastrar" onclick="validate()">
-                    </form>
-                </section>
-            </main>
+                        <div class="col mb-3">
+                            <label for="inputDate" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="inputDate" name="date">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="inputUser" class="form-label">Nome de Usuario</label>
+                            <input type="text" class="form-control" id="inputUser" name="user">
+                        </div>
+                        <div class="col mb-3">
+                            <label for="inputPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="inputPassword" name="password">
+                        </div>
+                    </div>
+                    <div class="btn-confirm">
+                        <input class="btn btn-dark" type="button" value="Cadastrar" onclick="validate()">
+                    </div>
+                </form>
+            </section>
+        </main>
     </body>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -71,4 +80,5 @@
     <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
     <script src="./js/register-user.js"></script>
     <script src="./js/toast.js"></script>
+
     </html>
