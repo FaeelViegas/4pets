@@ -10,33 +10,51 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./styles/toast.css">
+        <link rel="stylesheet" href="./styles/login-user.css">
         <title>Login</title>
     </head>
 
     <body>
+        <header>
+            <div class="image-home">
+                <a href="./home">
+                    <img src="./assets/logo-header.png" alt="forpets">
+                </a>
+            </div>
+        </header>
         <main>
             <div class="notifications"></div>
-            <div>
-                <h1>LOGIN</h1>
-                <form action="login-user" name="frmLogin">
-                    <div class="container">
-                        <div class="input-group mb-3 z-index-0">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"
-                                    style="color: #2e2e2e;"></i></span>
-                            <input type="text" name="user" class="form-control" placeholder="Nome de Usuario"
-                                aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-lock"
-                                    style="color: #404040;"></i></span>
-                            <input type="password" name="password" class="form-control" placeholder="Senha"
-                                aria-label="Password" aria-describedby="basic-addon1">
-                        </div>
+            <div class="container-box">
+                <div class="box">
+                    <div class="container-image">
+                        <img src="./assets/login-image-form.png" alt="">
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <input type="button" class="button-enter btn btn-dark" value="ENTRAR" onclick="validate()">
-                    </div>
-                </form>
+                    <form action="login-user" name="frmLogin">
+                        <div class="container">
+                            <h1>LOGIN</h1>
+                            <div class="input-group mb-3 z-index-0">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"
+                                        style="color: #2e2e2e;"></i></span>
+                                <input type="text" name="user" class="form-control" placeholder="Nome de Usuario"
+                                    aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-lock"
+                                        style="color: #404040;"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="Senha"
+                                    aria-label="Password" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input type="button" class="button-enter btn btn-dark" value="ENTRAR" onclick="validate()">
+                        </div>
+                        <div class="btn-login">
+                            <a href="#" class="btn-google btn btn-dark"><i class="fa-brands fa-google"></i></a>
+                            <a href="#" class="btn-face btn btn-dark"><i class="fa-brands fa-facebook"></i></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </main>
     </body>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -51,4 +69,5 @@
     <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
     <script src="./js/toast.js"></script>
     <script src="./js/login-user.js"></script>
+
     </html>
