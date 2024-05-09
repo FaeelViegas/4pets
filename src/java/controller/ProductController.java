@@ -14,7 +14,7 @@ import model.bean.ProductDTO;
 import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys"})
+@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products"})
 public class ProductController extends HttpServlet {
 
     Gson gson = new Gson();

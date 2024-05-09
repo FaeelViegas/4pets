@@ -25,10 +25,19 @@
         <main>
             <div class="notifications"></div>
             <div>
-                <h1>CRIAR CONTA</h1>
             </div>
             <section class="container">
                 <form name="frmRegister" action="insert-user" method="post">
+                    <h1>CRIAR CONTA</h1>
+                    <div class="btn-login">
+                        <a href="#" class="btn-google btn btn-dark"><i class="fa-brands fa-google"></i></a>
+                        <a href="#" class="btn-face btn btn-dark"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                    <div class="span-container d-flex">
+                        <hr>
+                        <span>ou</span>
+                        <hr>
+                    </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="inputName" class="form-label">Nome Completo</label>
