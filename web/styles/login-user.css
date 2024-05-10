@@ -5,6 +5,10 @@
 }
 
 @media(min-width:991px) {
+    h1 {
+        color: #1B5151;
+    }
+
     .image-home {
         display: flex;
         justify-content: center;
@@ -16,7 +20,7 @@
     }
 
     .container-box {
-        height: 100vh;
+        margin-top: 10%;
         width: 100vw;
         display: flex;
         justify-content: center;
@@ -62,11 +66,34 @@
     .btn-login {
         display: flex;
         justify-content: center;
-        gap: 30px;
+        gap: 15px;
     }
 
     .btn-login a {
-        width: 100px;
+        width: 45%;
         margin-top: 15px;
+        background-color: transparent;
+    }
+
+    .btn-google {
+        color: rgb(226, 36, 36);
+        border-color: rgb(226, 36, 36);
+        transition: .2s ease-in-out;
+    }
+
+    .btn-face {
+        color: rgb(39, 36, 226);
+        border-color: rgb(39, 36, 226);
+        transition: .2s ease-in-out;
+    }
+
+    .btn-face:hover {
+        background-color: rgb(39, 36, 226);
+        border-color: rgb(39, 36, 226);
+    }
+
+    .btn-google:hover {
+        background-color: rgb(226, 36, 36);
+        border-color: rgb(226, 36, 36);
     }
 }

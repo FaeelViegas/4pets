@@ -5,10 +5,12 @@
 }
 
 @media(min-width:991px) {
-    h1{
+    h1 {
         text-align: center;
         padding: 20px;
+        color: #1B5151;
     }
+
     .image-home {
         display: flex;
         justify-content: center;
@@ -28,6 +30,15 @@
 
     .container form {
         width: 60%;
+        margin-top: 10%;
+    }
+
+    .container form label {
+        color: #1B5151;
+    }
+
+    .container form hr {
+        width: 50%;
     }
 
     .btn-confirm {
@@ -42,5 +53,48 @@
     .btn-confirm .btn {
         border: none;
         background-color: rgb(0, 166, 166);
+    }
+
+    .span-container {
+        opacity: 50%;
+    }
+
+    .span-container span {
+        display: flex;
+        align-items: center;
+        padding: 0 10px 0 10px;
+    }
+
+    .btn-login {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-login a {
+        width: 50%;
+        margin-top: 10px;
+        background-color: transparent;
+    }
+
+    .btn-google {
+        color: rgb(226, 36, 36);
+        border-color: rgb(226, 36, 36);
+        transition: .2s ease-in-out;
+    }
+
+    .btn-face {
+        color: rgb(39, 36, 226);
+        border-color: rgb(39, 36, 226);
+        transition: .2s ease-in-out;
+    }
+
+    .btn-face:hover {
+        background-color: rgb(39, 36, 226);
+        border-color: rgb(39, 36, 226);
+    }
+
+    .btn-google:hover {
+        background-color: rgb(226, 36, 36);
+        border-color: rgb(226, 36, 36);
     }
 }
