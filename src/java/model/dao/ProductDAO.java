@@ -11,7 +11,7 @@ import model.bean.ProductDTO;
 
 public class ProductDAO {
 
-    public List<ProductDTO> read(String search) {
+    public List<ProductDTO> read() {
         List<ProductDTO> products = new ArrayList<>();
         String sql = "SELECT * FROM products";
         try {
@@ -19,8 +19,6 @@ public class ProductDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, search);
-            stmt.setString(2, search);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 ProductDTO objProduct = new ProductDTO();

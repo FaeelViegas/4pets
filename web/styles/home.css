@@ -1,0 +1,5 @@
+@media(min-width:991px){
+    .c-carousel{
+        display: flex;
+    }
+}
