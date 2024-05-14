@@ -1,15 +1,19 @@
 const cartButtonOpen = document.getElementById('cart-button-open');
 const cartButtonClose = document.getElementById('cart-button-close');
+const background = document.getElementById('background-cart');
 let priceFooter = document.getElementById('total-price-footer');
 
 //adiciona e remove a class 'active' do elemento 'shoppingCart'
 function toggleMenu(event) {
-    const menu = document.getElementById('shoppingCart');
-    menu.classList.toggle('active');
+    const cart = document.getElementById('shoppingCart');
+    const background = document.getElementById('background-cart');
+    cart.classList.toggle('active');
+    background.classList.toggle('active');
 }
 
 cartButtonOpen.addEventListener('click', toggleMenu);
 cartButtonClose.addEventListener('click', toggleMenu);
+background.addEventListener('click', toggleMenu);
 
 //cria os card com base nos dados do carrinho de compra
 function createCartCard(cartItens) {

@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import model.bean.ImageDTO;
 import model.bean.ProductDTO;
+import model.bean.StockDTO;
 
 public class ProductDAO {
     
     ImageDTO objImage = new ImageDTO();
+    StockDTO objStock = new StockDTO();
     
     public List<ProductDTO> read() {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT * FROM products";
+        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image FROM products p LEFT JOIN images i ON p.id_product = i.product_id;";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
@@ -32,6 +34,7 @@ public class ProductDAO {
                 objProduct.setDescription(rs.getString("description"));
                 objProduct.setCategoryId(rs.getInt("category_id"));
                 objProduct.setSellerId(rs.getInt("seller_id"));
+                objProduct.setImage(rs.getBytes("image"));
                 products.add(objProduct);
             }
             rs.close();
@@ -123,6 +126,8 @@ public class ProductDAO {
             } else {
                 throw new SQLException("Falha ao recuperar o ID do produto gerado automaticamente.");
             }
+            objStock.setQuantity(objProduct.getQuantity());
+            objStock.setProductId(idProduto);
             objImage.setProductId(idProduto);
             objImage.setImage(objProduct.getImage());
             insertImageProduct(objImage);
@@ -145,7 +150,23 @@ public class ProductDAO {
             stmt.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Erro no insert de imagem: " + e);
+            System.out.println("Erro no insert de imagem do produto: " + e);
+        }
+    }
+    
+    public void insertStockProduct(StockDTO objStock) {
+        try {
+            Connection connection = ConnectionDB.connect();
+            PreparedStatement stmt = null;
+            stmt = connection.prepareStatement("INSERT INTO stock (quantity ,product_id) VALUES (?, ?)");
+            stmt.setInt(1, objStock.getQuantity());
+            stmt.setInt(2, objStock.getProductId());
+            
+            stmt.executeUpdate();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Erro no insert de estoque de produto: " + e);
         }
     }
 }
