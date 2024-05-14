@@ -84,6 +84,9 @@
                         VENDEDOR
                         <input type="text" name="seller" class="form-control" placeholder="vendedor"
                             aria-label="Username" aria-describedby="basic-addon1">
+                        QUANTIDADE EM ESTOQUE
+                        <input type="text" name="stock" class="form-control" placeholder="quantidade"
+                            aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Descrição</span>

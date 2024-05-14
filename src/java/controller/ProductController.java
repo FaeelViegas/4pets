@@ -95,17 +95,14 @@ public class ProductController extends HttpServlet {
             }
             byte[] imageBytes = outputStream.toByteArray();
 
-            String name = request.getParameter("name");
             String description = request.getParameter("description");
-            double price = Double.parseDouble(request.getParameter("price"));
-            int category = Integer.parseInt(request.getParameter("category"));
-            int seller = Integer.parseInt(request.getParameter("seller"));
-            objProduct.setName(name);
+            objProduct.setName(request.getParameter("name"));
             objProduct.setDescription(description);
-            objProduct.setPrice(price);
-            objProduct.setCategoryId(category);
-            objProduct.setSellerId(seller);
+            objProduct.setPrice(Double.parseDouble(request.getParameter("price")));
+            objProduct.setCategoryId(Integer.parseInt(request.getParameter("category")));
+            objProduct.setSellerId(Integer.parseInt(request.getParameter("seller")));
             objProduct.setImage(imageBytes);
+            objProduct.setQuantity(Integer.parseInt(request.getParameter("stock")));
             objProductDao.insertProduct(objProduct);
 
         }
