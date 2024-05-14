@@ -1,5 +1,10 @@
 @media(min-width:991px){
-    .c-carousel{
+    .c-carousel--market{
         display: flex;
+    }
+
+    .market-card img{
+        object-fit: cover;
+        width: 185px;
     }
 }

@@ -8,17 +8,19 @@ public class ProductDTO {
     private String name;
     private double price;
     private String description;
+    private byte[] image;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int idProduct, int categoryId, int sellerId, String name, double price, String description) {
+    public ProductDTO(int idProduct, int categoryId, int sellerId, String name, double price, String description, byte[] image) {
         this.idProduct = idProduct;
         this.categoryId = categoryId;
         this.sellerId = sellerId;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.image = image;
     }
 
     public int getIdProduct() {
@@ -68,5 +70,13 @@ public class ProductDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
 }
