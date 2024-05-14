@@ -1,26 +1,34 @@
 package controller;
 
 import com.google.gson.Gson;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.bean.CategoryDTO;
+import model.bean.ImageDTO;
 import model.bean.ProductDTO;
 import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products"})
+@MultipartConfig
+@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product"})
 public class ProductController extends HttpServlet {
 
     Gson gson = new Gson();
     ProductDTO objProduct = new ProductDTO();
     CategoryDAO objCategoryDao = new CategoryDAO();
     ProductDAO objProductDao = new ProductDAO();
+    ImageDTO objImage = new ImageDTO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -75,6 +83,32 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String url = request.getServletPath();
+        if (url.equals("/insert-product")) {
+            Part filePart = request.getPart("image");
+            InputStream inputStream = filePart.getInputStream();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead = -1;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            byte[] imageBytes = outputStream.toByteArray();
+
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            double price = Double.parseDouble(request.getParameter("price"));
+            int category = Integer.parseInt(request.getParameter("category"));
+            int seller = Integer.parseInt(request.getParameter("seller"));
+            objProduct.setName(name);
+            objProduct.setDescription(description);
+            objProduct.setPrice(price);
+            objProduct.setCategoryId(category);
+            objProduct.setSellerId(seller);
+            objProduct.setImage(imageBytes);
+            objProductDao.insertProduct(objProduct);
+
+        }
     }
 
     @Override

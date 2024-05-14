@@ -18,30 +18,32 @@
     <body>
         <%@include file="header.jsp" %>
             <main>
-                <h2 class="title-carousel">Produtos que você encontra na 4Pets!</h2>
-                <div class="c-carousel c-carousel--simple">
-                    <div class="c-carousel__slides js-carousel--products d-flex">
+                <section class="products-4pets">
+                    <h2 class="title-carousel">Produtos que você encontra na 4Pets!</h2>
+                    <div class="c-carousel c-carousel--products">
+                        <div class="c-carousel__slides js-carousel--products d-flex">
+                        </div>
+                        <div class="carousel-buttons d-flex justify-content-center">
+                            <button class="js-carousel--simple-prev btn-slide m-2" aria-label="Anterior"><i
+                                    class="fa-solid fa-arrow-left"></i></button>
+                            <button class="js-carousel--simple-next btn-slide m-2" aria-label="Próximo"><i
+                                    class="fa-solid fa-arrow-right"></i></button>
+                        </div>
                     </div>
-                    <div class="carousel-buttons d-flex justify-content-center">
-                        <button class="js-carousel--simple-prev btn-slide m-2" aria-label="Anterior"><i
-                                class="fa-solid fa-arrow-left"></i></button>
-                        <button class="js-carousel--simple-next btn-slide m-2" aria-label="Próximo"><i
-                                class="fa-solid fa-arrow-right"></i></button>
-                    </div>
-                </div>
+                </section>
                 <section class="prominence-market">
                     <h2 class="title-carousel">Lojas em destaque!</h2>
-                    <div class="c-carousel c-carousel--simple">
-                        <div class="carousel-buttons d-flex justify-content-center">
+                    <div class="c-carousel c-carousel--market">
+                        <div class="carousel-buttons d-flex justify-content-center align-items-center">
                             <button class="js-carousel--simple-prev btn-slide m-2" aria-label="Anterior"><i
                                     class="fa-solid fa-arrow-left"></i></button>
                         </div>
                         <div class="c-carousel__slides js-carousel--market d-flex">
                             <div class="market-card">
-                                <img src="#" alt="imagem">
+                                <img src="https://th.bing.com/th/id/OIG1.F_t5tiiRDeVorScxKHyj?pid=ImgGn" alt="imagem">
                             </div>
                         </div>
-                        <div class="carousel-buttons d-flex justify-content-center">
+                        <div class="carousel-buttons d-flex justify-content-center align-items-center">
                             <button class="js-carousel--simple-next btn-slide m-2" aria-label="Próximo"><i
                                     class="fa-solid fa-arrow-right"></i></button>
                         </div>
