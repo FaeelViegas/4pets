@@ -1,45 +1,69 @@
-.card a {
-    text-decoration: none;
-}
+@media(min-width:991px) {
+    .title-carousel {
+        color: #1A3333;
+    }
 
-.card-body {
-    height: 420px;
-    width: 280px;
-    border-radius: 15px;
-    box-shadow: 1px 0px 2px 3px rgba(44, 44, 44, 0.226);
-}
+    .card a {
+        text-decoration: none;
+    }
 
-.card-body img {
-    object-fit: cover;
-    height: 180px;
-}
+    .card-body {
+        margin: 10px;
+        height: 420px;
+        width: 280px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 6px 4px rgba(48, 48, 48, 0.226);
+    }
 
-.card-body h5 {
-    text-align: center;
-    font-size: 17px;
-    overflow-y: hidden;
-    max-height: 40px;
-}
+    .card-body img {
+        object-fit: cover;
+        height: 180px;
+    }
 
-.card-body .name-product {
-    color: rgb(78, 78, 78);
-    font-weight: lighter;
-}
+    .card-body h5 {
+        color: #223333;
+        text-align: center;
+        font-size: 17px;
+        overflow-y: hidden;
+        max-height: 40px;
+    }
 
-.price .value {
-    color: rgb(48, 48, 48);
-    font-weight: bold;
-}
+    .card-body .name-product {
+        color: rgb(78, 78, 78);
+        font-weight: lighter;
+    }
 
-.btn-container {
-    transform: translateY(100%);
-}
+    .price .value {
+        color: #1B5151;
+        font-weight: bold;
+    }
 
-.btn {
-    background-color: rgb(0, 166, 166);
-    color: white;
-}
-.btn:hover {
-    background-color: rgb(0, 174, 174);
-    color: white;
+    .btn-container {
+        transform: translateY(100%);
+    }
+
+    .btn-card {
+        width: 90%;
+        height: 35px;
+        margin: 0 0 3px 3px;
+        border: none;
+        border-radius: 10px;
+        background-color: #00A6A6;
+        color: white;
+    }
+
+    .btn-card:hover {
+        background-color: #00A6A6;
+        color: white;
+    }
+
+    .btn-slide {
+        width: 55px;
+        height: 55px;
+        background-color: #00A6A6;
+        color: white;
+        border: none;
+        border-radius: 100%;
+        font-size: 20px;
+    }
 }
