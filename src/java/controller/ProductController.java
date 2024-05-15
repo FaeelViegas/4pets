@@ -47,6 +47,7 @@ public class ProductController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/search")) {
             String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+            search = new String(search.getBytes("ISO-8859-1"), "UTF-8");
             if (search.equals("")) {
                 List<ProductDTO> products = objProductDao.searchCategory(Integer.parseInt(request.getParameter("category")));
                 String json = gson.toJson(products);
@@ -95,16 +96,22 @@ public class ProductController extends HttpServlet {
             }
             byte[] imageBytes = outputStream.toByteArray();
 
+            String name = request.getParameter("name");
             String description = request.getParameter("description");
-            objProduct.setName(request.getParameter("name"));
+            name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
+            description = new String(description.getBytes("ISO-8859-1"), "UTF-8");
+            objProduct.setName(name);
             objProduct.setDescription(description);
             objProduct.setPrice(Double.parseDouble(request.getParameter("price")));
             objProduct.setCategoryId(Integer.parseInt(request.getParameter("category")));
             objProduct.setSellerId(Integer.parseInt(request.getParameter("seller")));
             objProduct.setImage(imageBytes);
-            objProduct.setQuantity(Integer.parseInt(request.getParameter("stock")));
+            objProduct.setQuantity(Integer.parseInt(request.getParameter("quantity")));
             objProductDao.insertProduct(objProduct);
 
+            String path = "/WEB-INF/jsp/dashboard-seller.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+            dispatcher.forward(request, response);
         }
     }
 

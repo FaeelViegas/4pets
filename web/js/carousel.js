@@ -43,7 +43,7 @@ setTimeout(() => {
             {
                 breakpoint: 900,
                 settings: {
-                    slidesToShow: 6,
+                    slidesToShow: 5,
                     slidesToScroll: 1,
                 },
             },
