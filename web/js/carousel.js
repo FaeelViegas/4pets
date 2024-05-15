@@ -1,4 +1,12 @@
 setTimeout(() => {
+    const $loader = document.getElementById('loader');
+    $loader.classList.remove('active');
+    const $loading = document.getElementById('loading');
+    $loading.classList.remove('act');
+
+}, "990");
+
+setTimeout(() => {
     const $simpleCarousel = document.querySelector(".js-carousel--products");
 
     new Glider($simpleCarousel, {
@@ -49,4 +57,4 @@ setTimeout(() => {
             },
         ],
     });
-}, "3000");
+}, "1000");

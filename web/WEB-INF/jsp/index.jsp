@@ -22,13 +22,16 @@
                     <h2 class="title-carousel">Produtos que você encontra na 4Pets!</h2>
                     <div class="c-carousel c-carousel--products">
                         <div class="c-carousel__slides js-carousel--products d-flex">
+                            <div id="loading" class="act">
+                                <div id="loader" class="active"></div>
+                            </div>
                         </div>
-                        <div class="carousel-buttons d-flex justify-content-center">
-                            <button class="js-carousel--simple-prev btn-slide m-2" aria-label="Anterior"><i
-                                    class="fa-solid fa-arrow-left"></i></button>
-                            <button class="js-carousel--simple-next btn-slide m-2" aria-label="Próximo"><i
-                                    class="fa-solid fa-arrow-right"></i></button>
-                        </div>
+                    </div>
+                    <div class="carousel-buttons d-flex justify-content-center">
+                        <button class="js-carousel--simple-prev btn-slide m-2" aria-label="Anterior"><i
+                                class="fa-solid fa-arrow-left"></i></button>
+                        <button class="js-carousel--simple-next btn-slide m-2" aria-label="Próximo"><i
+                                class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </section>
                 <section class="prominence-market">
