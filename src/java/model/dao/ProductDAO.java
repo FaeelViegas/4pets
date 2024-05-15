@@ -48,7 +48,8 @@ public class ProductDAO {
     
     public List<ProductDTO> searchProduct(String search) {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
+        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image FROM products p LEFT JOIN images"
+                + " i ON p.id_product = i.product_id WHERE name LIKE ? OR description LIKE ?";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
@@ -65,6 +66,7 @@ public class ProductDAO {
                 objProduct.setDescription(rs.getString("description"));
                 objProduct.setCategoryId(rs.getInt("category_id"));
                 objProduct.setSellerId(rs.getInt("seller_id"));
+                objProduct.setImage(rs.getBytes("image"));
                 products.add(objProduct);
             }
             rs.close();
@@ -78,7 +80,8 @@ public class ProductDAO {
     
     public List<ProductDTO> searchCategory(int category) {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT * FROM products WHERE category_id = ?";
+        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, "
+                + "i.image FROM products p LEFT JOIN images i ON p.id_product = i.product_id WHERE category_id = ?";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
@@ -94,6 +97,7 @@ public class ProductDAO {
                 objProduct.setDescription(rs.getString("description"));
                 objProduct.setCategoryId(rs.getInt("category_id"));
                 objProduct.setSellerId(rs.getInt("seller_id"));
+                objProduct.setImage(rs.getBytes("image"));
                 products.add(objProduct);
             }
             rs.close();
@@ -131,6 +135,7 @@ public class ProductDAO {
             objImage.setProductId(idProduto);
             objImage.setImage(objProduct.getImage());
             insertImageProduct(objImage);
+            insertStockProduct(objStock);
             stmt.close();
             connection.close();
         } catch (SQLException e) {

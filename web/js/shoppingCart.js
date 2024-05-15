@@ -22,7 +22,7 @@ function createCartCard(cartItens) {
     cardItem.innerHTML = `
         <section class="item-cart" id="${cartItens.idProduct}">
             <div class="image-cart">
-                <img src="data:image/png;base64,"
+                <img src="data:image/png;base64,${cartItens.image.value}"
                     alt="${cartItens.name}">
             </div>
             <div class="container-name-cart-item">
@@ -32,7 +32,7 @@ function createCartCard(cartItens) {
                 <i class="fa-solid fa-trash-can fa-xs btn btn-outline-danger" onclick="deleteItem(${cartItens.idProduct})"></i>
             </div>
             <div class="container-value-cart">
-                <span>R$${cartItens.priceUnitary}</span>
+                <span>R$${cartItens.priceUnitary.toFixed(2)}</span>
                 <input id="qtd-input" onclick="sendQtd(${cartItens.idProduct}, this.value)" type="number" value="${cartItens.quantity}" min="0" max="10" step="1" />
                 <span>R$ ${totalPrice.toFixed(2)}</span>
             </div>

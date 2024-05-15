@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="pt-br">
 
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -85,7 +85,7 @@
                         <input type="text" name="seller" class="form-control" placeholder="vendedor"
                             aria-label="Username" aria-describedby="basic-addon1">
                         QUANTIDADE EM ESTOQUE
-                        <input type="text" name="stock" class="form-control" placeholder="quantidade"
+                        <input type="text" name="quantity" class="form-control" placeholder="quantidade"
                             aria-label="Username" aria-describedby="basic-addon1">
                         <div class="input-group">
                             <div class="input-group-prepend">
