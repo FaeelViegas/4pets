@@ -46,7 +46,7 @@
         backdrop-filter: blur(6px);
         flex-wrap: wrap;
         justify-content: center;
-        
+
     }
 
     .user-container:hover .box {
@@ -144,5 +144,17 @@
         color: rgb(0, 166, 166);
         background-color: rgb(248, 252, 255);
         border-radius: 10px;
+    }
+
+    .top-header {
+        display: flex;
+        height: 30px;
+        background-color: rgb(0, 166, 166);
+        align-items: center;
+    }
+
+    .top-header a {
+        color: rgb(246, 246, 246);
+        font-size: 14px;
     }
 }

@@ -8,6 +8,7 @@ function createProductCard(product) {
 
     // Converter os bytes da imagem para uma string Base64
     const base64Image = arrayBufferToBase64(product.image);
+    
     card.innerHTML = `
             <div class="card border-0">
                 <div class="card-body p-4">
