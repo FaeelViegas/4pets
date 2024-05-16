@@ -56,6 +56,7 @@ public class CartController extends HttpServlet {
                 javax.json.JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
                 int productId = jsonObject.getInt("productId");
                 String productName = jsonObject.getString("productName");
+                productName = new String(productName.getBytes("ISO-8859-1"), "UTF-8");
                 double productPrice = jsonObject.getJsonNumber("productPrice").doubleValue();
                 int productQtd = jsonObject.getInt("productQtd");
                 JsonString productImage = jsonObject.getJsonString("productImage");

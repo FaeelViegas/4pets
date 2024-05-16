@@ -30,7 +30,13 @@
         z-index: 20000;
     }
     .header-cart .btn{
-        border-color: rgb(0, 223, 223);
+        background-color: rgb(0, 174, 174);
+        border-color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
+    }
+    .header-cart .btn:hover{
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 223, 223);
     }
     .header-cart .btn:focus{
         box-shadow: none;
@@ -57,6 +63,7 @@
     .footer-cart .button-confirm .btn-success {
         width: 90%;
         background-color: rgb(0, 174, 174);
+        border: none;
     }
 
     #shoppingCart.active {

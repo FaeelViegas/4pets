@@ -15,6 +15,12 @@
 
     <body>
         <header>
+            <div class="top-header">
+                <nav class="container-nav-top">
+                    <a href="./dashboard">Central do Vendedor |</a>
+                    <a href="#">Venda na 4Pets</a>
+                </nav>
+            </div>
             <div class="container-header d-flex">
                 <div class="logo-container">
                     <a href="./home">
@@ -43,15 +49,15 @@
             <div class="category-header">
                 <nav>
                     <ul class="category d-flex">
-                        <li><a href="./dashboard">Ver todas as categorias</a></li>
+                        <li><a href="#">Ver todas as categorias</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="container-cart-shopping">
                 <div id="shoppingCart">
                     <header class="header-cart">
-                        <button class="btn btn-outline-info" id="cart-button-close"><i
-                                class="fa-solid fa-xmark text-light"></i></button>
+                        <button class="btn btn-info" id="cart-button-close"><i
+                                class="fa-solid fa-xmark"></i></button>
                         <div class="text-light">Carrinho(<span id="cart-itens-qtd">0</span>)</div>
                     </header>
                     <div class="itens-cart-ul">

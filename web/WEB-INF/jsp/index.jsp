@@ -38,16 +38,34 @@
                     <h2 class="title-carousel">Lojas em destaque!</h2>
                     <div class="c-carousel c-carousel--market">
                         <div class="carousel-buttons d-flex justify-content-center align-items-center">
-                            <button class="js-carousel--simple-prev btn-slide m-2" aria-label="Anterior"><i
+                            <button class="js-carousel--market-prev btn-slide m-2" aria-label="Anterior"><i
                                     class="fa-solid fa-arrow-left"></i></button>
                         </div>
                         <div class="c-carousel__slides js-carousel--market d-flex">
                             <div class="market-card">
-                                <img src="https://th.bing.com/th/id/OIG1.F_t5tiiRDeVorScxKHyj?pid=ImgGn" alt="imagem">
+                                <img src="https://th.bing.com/th/id/OIG4.UWYTWn7Twta3xCdH1aoH?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                            </div>
+                            <div class="market-card">
+                                <img src="https://th.bing.com/th/id/OIG4.zEyv7HJGbmmiZnjZsW8v?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                            </div>
+                            <div class="market-card">
+                                <img src="https://th.bing.com/th/id/OIG2.imAKInQ3Mj9o35_2XM.h?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                            </div>
+                            <div class="market-card">
+                                <img src="https://th.bing.com/th/id/OIG1.AR6SVoVcJ_2s31vjMohz?pid=ImgGn" alt="imagem">
+                            </div>
+                            <div class="market-card">
+                                <img src="https://th.bing.com/th/id/OIG1.11Gugw8LYngGg_x0Uasp?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                            </div>
+                            <div class="market-card">
+                                <img src="https://th.bing.com/th/id/OIG1.Ab9Q.yMNr5F8xYEEhWXL?pid=ImgGn" alt="imagem">
+                            </div>
+                            <div class="market-card">
+                                <img src="https://th.bing.com/th/id/OIG2.D13xT3inOxvnPC722.N_?pid=ImgGn" alt="imagem">
                             </div>
                         </div>
                         <div class="carousel-buttons d-flex justify-content-center align-items-center">
-                            <button class="js-carousel--simple-next btn-slide m-2" aria-label="Próximo"><i
+                            <button class="js-carousel--market-next btn-slide m-2" aria-label="Próximo"><i
                                     class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </div>

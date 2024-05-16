@@ -1,11 +1,24 @@
 @media(min-width:991px) {
     .c-carousel--market {
         display: flex;
+        width: 100vw;
+    }
+
+    .js-carousel--market {
+        gap: 50px;
+    }
+
+    .market-card {
+        display: flex;
+        width: 185px;
+        height: 185px;
+        overflow: hidden;
     }
 
     .market-card img {
         object-fit: cover;
         width: 185px;
+        clip-path: circle(50% at 50% 50%);
     }
 
     #loading {
