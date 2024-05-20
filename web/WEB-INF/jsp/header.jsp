@@ -75,7 +75,7 @@
                             </table>
                         </div>
                         <div class="button-confirm">
-                            <a href="./finalize" class="btn btn-success">FINALIZAR</a>
+                            <a href="./finalize-order" class="btn btn-success">FINALIZAR</a>
                         </div>
                     </footer>
                 </div>
