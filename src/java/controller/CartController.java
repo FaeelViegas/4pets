@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.util.List;
 import javax.json.Json;
 import javax.json.JsonString;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.CartDTO;
 import model.bean.ShoppingCart;
 
-@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart"})
+@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order"})
 public class CartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = request.getServletPath();
+        if (url.equals("/finalize-order")) {
+            String path = "/WEB-INF/jsp/checkout-page.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+            dispatcher.forward(request, response);
+        }
 
     }
 
