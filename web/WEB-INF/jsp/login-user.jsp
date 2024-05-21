@@ -30,7 +30,7 @@
                     <div class="container-image">
                         <img src="./assets/login-image-form.png" alt="">
                     </div>
-                    <form action="login-user" name="frmLogin">
+                    <form action="login-user" name="frmLogin" method="post">
                         <div class="container">
                             <h1>LOGIN</h1>
                             <div class="input-group mb-3 z-index-0">
