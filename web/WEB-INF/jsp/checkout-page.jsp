@@ -19,6 +19,10 @@
                     <i class="fa-solid fa-basket-shopping"></i>
                     <span>PRODUTO</span>
                 </div>
+                <div class="itens-cart-ul">
+                    <ul class="list-group-item">
+                    </ul>
+                </div>
             </div>
             <div class="resume-container">
                 <div class="header-container">
@@ -39,5 +43,5 @@
         </div>
     </main>
 </body>
-
+<script src="./js/checkout.js"></script>
 </html>
