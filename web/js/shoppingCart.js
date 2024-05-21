@@ -2,13 +2,15 @@ const cartButtonOpen = document.getElementById('cart-button-open');
 const cartButtonClose = document.getElementById('cart-button-close');
 const background = document.getElementById('background-cart');
 let priceFooter = document.getElementById('total-price-footer');
+const body = document.body;
 
-//adiciona e remove a class 'active' do elemento 'shoppingCart'
+//adiciona e remove a class 'active' do elemento
 function toggleMenu(event) {
     const cart = document.getElementById('shoppingCart');
     const background = document.getElementById('background-cart');
     cart.classList.toggle('active');
     background.classList.toggle('active');
+    body.classList.toggle('no-scroll');
 }
 
 cartButtonOpen.addEventListener('click', toggleMenu);
