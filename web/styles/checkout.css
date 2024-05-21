@@ -3,31 +3,77 @@
         background-color: #F0F0F0;
     }
 
+    .logo-container img {
+        object-fit: cover;
+        height: 50px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
     .container {
         display: grid;
         grid-template-columns: 70% 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
         gap: 30px;
-        grid-auto-flow: row;
-        grid-template-areas:
-            "cart-container resume-container"
-            "coupon-container delivery-container"
-            ". payment-container";
+    }
+
+    .container-right {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .cart-container {
-        grid-area: cart-container;
         -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
         -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
         box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
         background-color: #ffffff;
         border-radius: 10px;
+        margin-top: 30px;
+    }
+
+    .resume-container {
+        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        background-color: #ffffff;
+        border-radius: 10px;
+        width: 100%;
+        height: 200px;
+        margin-top: 30px;
+    }
+
+    .delivery-container {
+        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        background-color: #ffffff;
+        border-radius: 10px;
+        height: 300px;
+        width: 100%;
+    }
+
+    .payment-container {
+        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        background-color: #ffffff;
+        border-radius: 10px;
+        height: 100px;
+        width: 100%;
+    }
+
+    .coupon-container {
+        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
+        background-color: #ffffff;
+        border-radius: 10px;
+        height: 90px;
     }
 
     .cart-container ul {
         list-style: none;
-        margin-top: 80px;
-        margin-bottom: 115px;
     }
 
     .cart-container .item-cart {
@@ -83,45 +129,41 @@
         min-height: 120px;
     }
 
-    .resume-container {
-        grid-area: resume-container;
-        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        background-color: #ffffff;
-        border-radius: 10px;
-        width: 100%;
-    }
-
-    .delivery-container {
-        grid-area: delivery-container;
-        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        background-color: #ffffff;
-        border-radius: 10px;
-        height: 300px;
-        width: 100%;
-    }
-
     .payment-container {
-        grid-area: payment-container;
-        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        background-color: #ffffff;
-        border-radius: 10px;
-        height: 100px;
-        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
     }
 
-    .coupon-container {
-        grid-area: coupon-container;
-        -webkit-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.25);
-        background-color: #ffffff;
-        border-radius: 10px;
-        height: 90px;
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .button-container a {
+        width: 90%;
+        height: 35px;
+        background-color: rgb(0, 174, 174);
+        border: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .button-container a:hover {
+        background-color: rgb(0, 184, 184);
+        border: none;
+        color: rgb(255, 255, 255);
+    }
+
+    .back-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .back-container a {
+        text-decoration: none;
+        color: #1B5151;
     }
 }
