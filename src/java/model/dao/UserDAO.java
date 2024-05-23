@@ -58,4 +58,21 @@ public class UserDAO {
             System.out.println("Erro no insert de usuario: " + e);
         }
     }
+
+    public int returnUserId(UserDTO objUser) {
+        try (Connection connection = ConnectionDB.connect();
+                PreparedStatement stmt = connection.prepareStatement("SELECT id_user FROM users WHERE user_name = ?")) {
+            stmt.setString(1, objUser.getUserName());
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_user");
+                } else {
+                    return -1;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching user ID: " + e.getMessage());
+            return -1;
+        }
+    }
 }

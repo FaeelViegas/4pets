@@ -56,8 +56,7 @@
             <div class="container-cart-shopping">
                 <div id="shoppingCart">
                     <header class="header-cart">
-                        <button class="btn btn-info" id="cart-button-close"><i
-                                class="fa-solid fa-xmark"></i></button>
+                        <button class="btn btn-info" id="cart-button-close"><i class="fa-solid fa-xmark"></i></button>
                         <div class="text-light">Carrinho(<span id="cart-itens-qtd">0</span>)</div>
                     </header>
                     <div class="itens-cart-ul">
