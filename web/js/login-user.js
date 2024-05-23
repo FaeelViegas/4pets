@@ -18,11 +18,22 @@ function validate() {
             frmLogin.password.focus();
             return false;
         } else {
+            sendUserId(matchedUser.idUser);
             document.forms["frmLogin"].submit();
         }
     }
 }
-
+function sendUserId(userId) {
+    fetch(`./login-user?userId=${userId}`,)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao enviar solicitação');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
 let users;
 fetch('./users-data')
     .then(response => {

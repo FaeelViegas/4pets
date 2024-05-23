@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,12 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.bean.CategoryDTO;
 import model.bean.UserDTO;
 import model.dao.CategoryDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user","/home"})
+@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user", "/home"})
 public class UserController extends HttpServlet {
 
     Gson gson = new Gson();
@@ -33,10 +35,20 @@ public class UserController extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
         } else if (url.equals("/login-user")) {
+            String userId = request.getParameter("userId");
+            System.out.println("parametro: " + userId);
+            HttpSession session = request.getSession();
+            String nome = "jao";
+            session.setAttribute("id", nome);
+
             String path = "/WEB-INF/jsp/index.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
-        }else if(url.equals("/home")){
+        } else if (url.equals("/home")) {
+            HttpSession session = request.getSession(false);
+            String id = (String) session.getAttribute("id");
+            System.out.println("session: " + id);
+
             String path = "/WEB-INF/jsp/index.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
