@@ -34,7 +34,7 @@
                     <!--opção projetos do menu com sub menu-->
                     <li>
                         <div class="icon-link">
-                            <a href="./project-list.html">
+                            <a href="#">
                                 <i class="fa-solid fa-box"></i>
                                 <span class="link_name">Produto</span>
                             </a>
@@ -42,7 +42,7 @@
                         </div>
                         <!--sub menu da opção projetos do menu lateral-->
                         <ul class="sub-menu">
-                            <li><a href="./project-register.html">Produtos</a></li>
+                            <li><a href="./products">Produtos</a></li>
                         </ul>
                     </li>
                     <!--perfil do usuario-->
@@ -71,7 +71,7 @@
                     <form action="insert-product" enctype="multipart/form-data" method="post">
                         IMAGEM
                         <input type="file" name="image" class="form-control" placeholder="Carregue a imgaem"
-                            aria-label="Username" aria-describedby="basic-addon1">
+                            aria-label="Username" aria-describedby="basic-addon1" accept="image/png, image/jpeg" multiple>
                         Nome
                         <input type="text" name="name" class="form-control" placeholder="Nome do produto"
                             aria-label="Username" aria-describedby="basic-addon1">
