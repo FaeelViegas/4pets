@@ -97,7 +97,6 @@ fetch('./list-products')
         return response.json();
     })
     .then(data => {
-        console.log(data);
         loadProductsIntoCarousel(data);
     })
     .catch(error => {

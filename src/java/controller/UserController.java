@@ -2,7 +2,6 @@ package controller;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import static java.lang.System.out;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.bean.CategoryDTO;
 import model.bean.UserDTO;
-import model.dao.CategoryDAO;
 import model.dao.UserDAO;
 
 @WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user", "/home"})

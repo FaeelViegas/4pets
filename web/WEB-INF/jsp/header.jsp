@@ -18,7 +18,7 @@
             <div class="top-header">
                 <nav class="container-nav-top">
                     <a href="./dashboard">Central do Vendedor |</a>
-                    <a href="#">Venda na 4Pets</a>
+                    <a href="./register-seller">Venda na 4Pets</a>
                 </nav>
             </div>
             <div class="container-header d-flex">
