@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,20 +33,18 @@ public class UserController extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
         } else if (url.equals("/login-user")) {
-            String userId = request.getParameter("userId");
-            System.out.println("parametro: " + userId);
+            String user = request.getParameter("user");
             HttpSession session = request.getSession();
-            String nome = "jao";
-            session.setAttribute("id", nome);
+            session.setAttribute("user", user);
 
             String path = "/WEB-INF/jsp/index.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
         } else if (url.equals("/home")) {
             HttpSession session = request.getSession(false);
-            String id = (String) session.getAttribute("id");
-            System.out.println("session: " + id);
-
+            String user = (String) session.getAttribute("user");
+            objUser.setUserName(user);
+            int id = objUserDao.returnUserId(objUser);
             String path = "/WEB-INF/jsp/index.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
@@ -73,12 +72,18 @@ public class UserController extends HttpServlet {
         processRequest(request, response);
         String url = request.getServletPath();
         if (url.equals("/insert-user")) {
-            objUser.setName(request.getParameter("name"));
+            String name = request.getParameter("name");
+            String user = request.getParameter("user");
+            String password = request.getParameter("password");
+            name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
+            user = new String(user.getBytes("ISO-8859-1"), "UTF-8");
+            password = new String(password.getBytes("ISO-8859-1"), "UTF-8");
+            objUser.setName(name);
             objUser.setCpf(request.getParameter("cpf"));
             objUser.setPhone(request.getParameter("phone"));
             objUser.setBirthDate(request.getParameter("date"));
-            objUser.setUserName(request.getParameter("user"));
-            objUser.setPassword(request.getParameter("password"));
+            objUser.setUserName(user);
+            objUser.setPassword(password);
             objUserDao.insertUser(objUser);
             response.sendRedirect("./login-page");
         }
