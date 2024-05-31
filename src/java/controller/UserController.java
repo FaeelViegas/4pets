@@ -2,7 +2,6 @@ package controller;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import model.bean.UserDTO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user", "/home"})
+@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user", "/home", "/logout", "/profile-page", "/my-details", "/my-orders"})
 public class UserController extends HttpServlet {
 
     Gson gson = new Gson();
@@ -24,30 +23,64 @@ public class UserController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getServletPath();
-        if (url.equals("/login-page")) {
-            String path = "/WEB-INF/jsp/login-user.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-            dispatcher.forward(request, response);
-        } else if (url.equals("/register-page")) {
-            String path = "/WEB-INF/jsp/register-user.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-            dispatcher.forward(request, response);
-        } else if (url.equals("/login-user")) {
-            String user = request.getParameter("user");
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-
-            String path = "/WEB-INF/jsp/index.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-            dispatcher.forward(request, response);
-        } else if (url.equals("/home")) {
-            HttpSession session = request.getSession(false);
-            String user = (String) session.getAttribute("user");
-            objUser.setUserName(user);
-            int id = objUserDao.returnUserId(objUser);
-            String path = "/WEB-INF/jsp/index.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-            dispatcher.forward(request, response);
+        switch (url) {
+            case "/login-page": {
+                String path = "/WEB-INF/jsp/login-user.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/register-page": {
+                String path = "/WEB-INF/jsp/register-user.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/login-user": {
+                String user = request.getParameter("user");
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                String path = "/WEB-INF/jsp/index.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/home": {
+                HttpSession session = request.getSession(false);
+                String user = (String) session.getAttribute("user");
+                objUser.setUserName(user);
+                int id = objUserDao.returnUserId(objUser);
+                String path = "/WEB-INF/jsp/index.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/logout": {
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect(request.getContextPath() + "/login-page");
+                break;
+            }
+            case "/profile-page": {
+                String path = "/WEB-INF/jsp/profile-page.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/my-details": {
+                String path = "/WEB-INF/jsp/profile-page-details.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/my-orders": {
+                String path = "/WEB-INF/jsp/profile-page-orders.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            default:
+                break;
         }
     }
 

@@ -2,6 +2,7 @@ const cartButtonOpen = document.getElementById('cart-button-open');
 const cartButtonClose = document.getElementById('cart-button-close');
 const background = document.getElementById('background-cart');
 let priceFooter = document.getElementById('total-price-footer');
+const btnFinalize = document.getElementById("btn-finalize");
 const body = document.body;
 
 //adiciona e remove a class 'active' do elemento
@@ -134,6 +135,9 @@ function loadCart() {
             return response.json();
         })
         .then(data => {
+            if (data === "") {
+                btnFinalize.disabled = true;
+            }
             updateCartTotal(data);
             loadCartProduct(data);
         })
