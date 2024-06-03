@@ -21,7 +21,7 @@ import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
 @MultipartConfig
-@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product"})
+@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product", "/product"})
 public class ProductController extends HttpServlet {
 
     Gson gson = new Gson();
@@ -35,6 +35,10 @@ public class ProductController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/search-product")) {
             String path = "/WEB-INF/jsp/search-page-product.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+            dispatcher.forward(request, response);
+        } else if (url.equals("/product")) {
+            String path = "/WEB-INF/jsp/product-page.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
         }
