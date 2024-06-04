@@ -83,6 +83,7 @@
     }
 
     #background-cart {
+        display: none;
         z-index: 1;
         top: 0;
         position: absolute;
@@ -93,6 +94,7 @@
     }
 
     #background-cart.active {
+        display: block;
         visibility: visible;
         top: 0;
         position: absolute;
