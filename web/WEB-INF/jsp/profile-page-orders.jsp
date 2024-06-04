@@ -17,6 +17,7 @@
                         MEUS PEDIDOS
                     </div>
                 </main>
+                <%@include file="footer.jsp" %>
     </body>
 
     </html>

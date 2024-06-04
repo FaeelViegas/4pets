@@ -3,6 +3,11 @@
         background-color: #F0F0F0;
     }
 
+    footer {
+        position: relative;
+        z-index: 100;
+    }
+
     .title {
         margin: 0px 10% 0 10%;
     }
@@ -12,10 +17,12 @@
         grid-template-columns: 1fr 1fr;
         justify-items: center;
     }
-    .user-datails-form{
+
+    .user-datails-form {
         display: flex;
         flex-direction: column;
     }
+
     .container-details {
         display: grid;
         grid-template-columns: 1fr;

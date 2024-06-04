@@ -43,19 +43,23 @@
                         </div>
                         <div class="c-carousel__slides js-carousel--market d-flex">
                             <div class="market-card">
-                                <img src="https://th.bing.com/th/id/OIG4.UWYTWn7Twta3xCdH1aoH?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                                <img src="https://th.bing.com/th/id/OIG4.UWYTWn7Twta3xCdH1aoH?w=1024&h=1024&rs=1&pid=ImgDetMain"
+                                    alt="imagem">
                             </div>
                             <div class="market-card">
-                                <img src="https://th.bing.com/th/id/OIG4.zEyv7HJGbmmiZnjZsW8v?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                                <img src="https://th.bing.com/th/id/OIG4.zEyv7HJGbmmiZnjZsW8v?w=1024&h=1024&rs=1&pid=ImgDetMain"
+                                    alt="imagem">
                             </div>
                             <div class="market-card">
-                                <img src="https://th.bing.com/th/id/OIG2.imAKInQ3Mj9o35_2XM.h?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                                <img src="https://th.bing.com/th/id/OIG2.imAKInQ3Mj9o35_2XM.h?w=1024&h=1024&rs=1&pid=ImgDetMain"
+                                    alt="imagem">
                             </div>
                             <div class="market-card">
                                 <img src="https://th.bing.com/th/id/OIG1.AR6SVoVcJ_2s31vjMohz?pid=ImgGn" alt="imagem">
                             </div>
                             <div class="market-card">
-                                <img src="https://th.bing.com/th/id/OIG1.11Gugw8LYngGg_x0Uasp?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="imagem">
+                                <img src="https://th.bing.com/th/id/OIG1.11Gugw8LYngGg_x0Uasp?w=1024&h=1024&rs=1&pid=ImgDetMain"
+                                    alt="imagem">
                             </div>
                             <div class="market-card">
                                 <img src="https://th.bing.com/th/id/OIG1.Ab9Q.yMNr5F8xYEEhWXL?pid=ImgGn" alt="imagem">
@@ -72,6 +76,7 @@
                 </section>
 
             </main>
+            <%@include file="footer.jsp" %>
     </body>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
