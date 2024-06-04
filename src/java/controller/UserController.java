@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import model.bean.UserDTO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user", "/home", "/logout", "/profile-page", "/my-details", "/my-orders"})
+@WebServlet(name = "UserController", urlPatterns = {"/login-page", "/register-page", "/users-data", "/insert-user", "/login-user", "/home", "/logout", "/profile-page", "/my-details", "/my-orders", "/user-data-logged"})
 public class UserController extends HttpServlet {
 
     Gson gson = new Gson();
@@ -46,10 +46,6 @@ public class UserController extends HttpServlet {
                 break;
             }
             case "/home": {
-                HttpSession session = request.getSession(false);
-                String user = (String) session.getAttribute("user");
-                objUser.setUserName(user);
-                int id = objUserDao.returnUserId(objUser);
                 String path = "/WEB-INF/jsp/index.jsp";
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
                 dispatcher.forward(request, response);
@@ -91,6 +87,17 @@ public class UserController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/users-data")) {
             List<UserDTO> users = objUserDao.read();
+            String json = gson.toJson(users);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        } else if (url.equals("/user-data-logged")) {
+            HttpSession session = request.getSession(false);
+            String user = (String) session.getAttribute("user");
+            objUser.setUserName(user);
+            int id = objUserDao.returnUserId(objUser);
+            List<UserDTO> users = objUserDao.dataUserLogged(id);
             String json = gson.toJson(users);
 
             response.setContentType("application/json");

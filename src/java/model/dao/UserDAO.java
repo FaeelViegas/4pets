@@ -40,6 +40,36 @@ public class UserDAO {
         return users;
     }
 
+    public List<UserDTO> dataUserLogged(int id) {
+        List<UserDTO> users = new ArrayList<>();
+        try {
+            Connection connection = ConnectionDB.connect();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            stmt = connection.prepareStatement("SELECT * FROM users WHERE id_user = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                UserDTO objUser = new UserDTO();
+                objUser.setIdUser(rs.getInt("id_user"));
+                objUser.setName(rs.getString("name"));
+                objUser.setPassword(rs.getString("password"));
+                objUser.setUserName(rs.getString("user_name"));
+                objUser.setPhone(rs.getString("phone"));
+                objUser.setBirthDate(rs.getString("birth_date"));
+                objUser.setCpf(rs.getString("cpf"));
+                users.add(objUser);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            System.out.println("Erro na leitura de usuario logado: " + e);
+        }
+        return users;
+    }
+
     public void insertUser(UserDTO objUser) {
         try {
             Connection connection = ConnectionDB.connect();

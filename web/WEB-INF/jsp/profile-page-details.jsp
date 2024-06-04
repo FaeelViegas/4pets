@@ -25,16 +25,28 @@
                                 <i class="fa-solid fa-newspaper"></i>
                                 <h2>Dados Basicos</h2>
                             </div>
-                            <form action="">
-                                <div class="field-wrapper">
-                                    <input type="text" name="full-name" id="">
+                            <form action="" class="user-datails-form" name="user-datails-form">
+                                <div class="field-wrapper hasValue">
+                                    <input type="text" name="fullName" id="full-name">
                                     <div class="field-placeholder"><span>Nome Completo</span></div>
                                 </div>
-                                <div class="field-wrapper">
-                                    <input type="text" name="phone" id="">
+                                <div class="field-wrapper hasValue">
+                                    <input type="text" name="cpf" id="cpf">
+                                    <div class="field-placeholder"><span>CPF</span></div>
+                                </div>
+                                <div class="field-wrapper hasValue">
+                                    <input type="date" name="birth-date" id="birthDate">
+                                    <div class="field-placeholder"><span>Data de Nascimento</span></div>
+                                </div>
+                                <div class="field-wrapper hasValue">
+                                    <input type="tel" name="phone" id="phone">
                                     <div class="field-placeholder"><span>Telefone Celular</span></div>
                                 </div>
                             </form>
+                            <div class="container-buttons">
+                                <button class="btn btn-outline-primary">ALTERAR NOME DE USUARIO</button>
+                                <button class="btn btn-outline-primary">ALTERAR SENHA</button>
+                            </div>
                         </section>
                         <section class="container-address">
                             <div class="header-container d-flex">
