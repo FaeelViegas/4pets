@@ -15,11 +15,10 @@ $(function () {
 });
 
 function insertDataUser(userData) {
-    document.getElementById('full-name').value
-    console.log(userData.name)
-    document.getElementById('cpf').value
-    document.getElementById('birthDate')
-    document.getElementById('phone').value
+    document.getElementById('full-name').value = userData.name;
+    document.getElementById('cpf').value = userData.cpf;
+    document.getElementById('birthDate').value = userData.birthDate;
+    document.getElementById('phone').value = userData.phone;
 }
 
 fetch('./user-data-logged')
@@ -30,8 +29,8 @@ fetch('./user-data-logged')
         return response.json();
     })
     .then(data => {
-        console.log(data);
-        insertDataUser(data);
+        const user = data[0];
+        insertDataUser(user);
     })
     .catch(error => {
         console.error(error);

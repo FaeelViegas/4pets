@@ -17,6 +17,7 @@
                         HOME USER
                     </div>
                 </main>
+                <%@include file="footer.jsp" %>
     </body>
 
     </html>
