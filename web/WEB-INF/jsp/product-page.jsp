@@ -16,51 +16,6 @@
     <body>
         <%@include file="header.jsp" %>
             <main>
-                <div class="container">
-                    <div class="container-left">
-                        <div class="container-product">
-                            <div class="image-container">
-                                <img src="https://m.media-amazon.com/images/I/61XJEwvCL8L.__AC_SX300_SY300_QL70_ML2_.jpg"
-                                    alt="">
-                            </div>
-                            <div class="name-container">
-                                <span class="name-product">
-                                    Areia Higiênica Meau Biodegradável Grãos Finos para Gatos
-                                </span>
-                            </div>
-                            <div class="store-container">
-                                <div class="store-box">
-                                    <div class="image-store">
-                                        <img src="https://th.bing.com/th/id/OIG1.11Gugw8LYngGg_x0Uasp?w=1024&h=1024&rs=1&pid=ImgDetMain"
-                                            alt="imagem">
-                                    </div>
-                                    <span>Paws Bites</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <button class="section-header"><i class="fa-solid fa-list"></i>Informações</button>
-                            <div class="section-content">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-right">
-                        <div class="product-value">
-                            <div>
-                                <span class="d-flex value-product pt-3 pb-3">
-                                    R$ 204,90
-                                </span>
-                            </div>
-                            <div class="d-flex justify-content-around">
-                                <span>Quantas unidades?</span>
-                                <input id="qtd-input" type="number" value="1" min="1" max="10" step="1" />
-                            </div>
-                            <div class="d-flex justify-content-center pt-3 pb-3">
-                                <button class="btn-add">Adicionar ao carrinho</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </main>
             <%@include file="footer.jsp" %>
     </body>

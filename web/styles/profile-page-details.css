@@ -16,11 +16,13 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         justify-items: center;
+        padding-bottom: 10%;
     }
 
     .user-datails-form {
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
     .container-details {
@@ -48,8 +50,10 @@
     }
 
     .field-wrapper {
+        display: flex;
         position: relative;
         margin-bottom: 15px;
+        justify-content: center;
     }
 
     .field-wrapper input {
@@ -67,7 +71,7 @@
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         color: #80868b;
-        left: 8px;
+        left: 25px;
         padding: 0 8px;
         -webkit-transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
         transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -88,7 +92,10 @@
 
     .field-wrapper input:not([disabled]):focus~.field-placeholder,
     .field-wrapper.hasValue input:not([disabled])~.field-placeholder {
-        -webkit-transform: scale(.75) translateY(-39px) translateX(-80px);
-        transform: scale(.75) translateY(-39px) translateX(-80px);
+        -webkit-transform: scale(.75) translateY(-39px) translateX(-40px);
+        transform: scale(.75) translateY(-39px) translateX(-40px);
+    }
+    .address-list{
+        height: 500px;
     }
 }
