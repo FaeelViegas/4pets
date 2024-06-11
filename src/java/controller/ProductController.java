@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,7 +20,7 @@ import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
 @MultipartConfig
-@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product", "/product"})
+@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product", "/product","/product-item"})
 public class ProductController extends HttpServlet {
 
     Gson gson = new Gson();
@@ -73,11 +72,18 @@ public class ProductController extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
-        }
-        if (url.equals("/list-products")) {
+        } else if (url.equals("/list-products")) {
             List<ProductDTO> products = objProductDao.read();
             String json = gson.toJson(products);
 
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        } else if (url.equals("/product-item")) {
+            int idProduct = Integer.parseInt(request.getParameter("id"));
+            List<ProductDTO> products = objProductDao.readProduct(idProduct);
+            
+            String json = gson.toJson(products);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);

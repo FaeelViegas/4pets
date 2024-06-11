@@ -46,6 +46,12 @@
         padding: 20px;
     }
 
+    .image-container img {
+        max-width: 300px;
+        max-height: 300px;
+        object-fit: cover;
+    }
+
     .store-container {
         grid-area: 2 / 2 / 3 / 3;
 
@@ -118,6 +124,11 @@
         overflow: hidden;
         transition: max-height 0.5s ease-out;
         padding: 0 10px;
+    }
+
+    .section-content pre{
+        white-space: pre-wrap;
+        font-family: sans-serif;
     }
 
     .btn-add {
