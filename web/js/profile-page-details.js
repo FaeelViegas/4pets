@@ -1,4 +1,13 @@
-//fonte do codigo abaixo https://www.freakyjolly.com/gmail-login-input-field-style/
+const openAddress = document.getElementById('btn-address');
+const backgroundAdress = document.getElementById('background-address');
+const containerAddress = document.getElementById('address-container');
+
+function toggleContainer(event) {
+    backgroundAdress.classList.toggle('active');
+}
+openAddress.addEventListener('click', toggleMenu);
+backgroundAdress.addEventListener('click', toggleMenu);
+
 $(function () {
 
     $(".field-wrapper .field-placeholder").on("click", function () {

@@ -38,14 +38,15 @@
                         </div>
                         <div class="user-container">
                             <c:choose>
-                                        <c:when test="${not empty sessionScope.user}">
-                                            <button id="user-button-open"><i class="fa-solid fa-user"></i>Bem Vindo ${sessionScope.user}</button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button id="user-button-open"><i class="fa-solid fa-user"></i>Entre e realize sua compra!</button>
-                                        </c:otherwise>
-                                    </c:choose>
-                            
+                                <c:when test="${not empty sessionScope.user}">
+                                    <button id="user-button-open"><i class="fa-solid fa-user"></i>Bem Vindo
+                                        ${sessionScope.user}</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button id="user-button-open"><i class="fa-solid fa-user"></i>Entre e realize sua
+                                        compra!</button>
+                                </c:otherwise>
+                            </c:choose>
                             <div class="box">
                                 <ul>
                                     <c:choose>

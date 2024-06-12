@@ -57,13 +57,16 @@
                             </div>
                             <div class="address-list-container">
                                 <ul class="address-list">
-                                    
+
                                 </ul>
                             </div>
                             <div class="container-buttons">
-                                <button class="btn btn-outline-primary">CADASTRAR ENDEREÇO</button>
+                                <button id="btn-address" class="">CADASTRAR ENDEREÇO</button>
                             </div>
                         </section>
+                    </div>
+                    <div id="background-address">
+                        <div id="address-container"></div>
                     </div>
                 </main>
                 <%@include file="footer.jsp" %>
