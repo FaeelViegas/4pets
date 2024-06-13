@@ -5,7 +5,7 @@
 
     footer {
         position: relative;
-        z-index: 100;
+        z-index: 11;
     }
 
     .title {
@@ -16,7 +16,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         justify-items: center;
-        padding-bottom: 10%;
+        padding-bottom: 5%;
     }
 
     .user-datails-form {
@@ -98,30 +98,5 @@
 
     .address-list {
         height: 500px;
-    }
-
-    #background-address {
-        display: flex;
-        position: absolute;
-        top: 0;
-        z-index: 10;
-        width: 100vw;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.3);
-        visibility: hidden;
-    }
-
-    #background-address.show {
-        visibility: visible;
-    }
-
-    #address-container {
-        display: flex;
-        background-color: white;
-        width: 40%;
-        height: 70%;
-        border-radius: 10px;
     }
 }
