@@ -3,6 +3,7 @@
     <html lang="pt-br">
 
     <head>
+        <link rel="stylesheet" href="./styles/toast.css">
         <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
         <script src="https://kit.fontawesome.com/52a6b206fa.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./styles/profile-page-details.css">
@@ -15,6 +16,7 @@
         <%@include file="header.jsp" %>
             <%@include file="sidebar-user.jsp" %>
                 <main>
+                    <div class="notifications"></div>
                     <div class="title d-flex">
                         <i class="fa-solid fa-user"></i>
                         <h2>Meus Dados</h2>
@@ -61,12 +63,96 @@
                                 </ul>
                             </div>
                             <div class="container-buttons">
-                                <button id="btn-address" class="">CADASTRAR ENDEREÇO</button>
+                                <button data-toggle="modal" data-target="#address-modal"
+                                    class="btn btn-outline-primary">CADASTRAR ENDEREÇO</button>
                             </div>
                         </section>
                     </div>
-                    <div id="background-address">
-                        <div id="address-container"></div>
+                    <div class="modal fade" id="address-modal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Cadastre um novo endereço de entrega!
+                                    </h5>
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"
+                                        aria-label="Close"><i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="address-form" name="address-form">
+                                        <div class="field-wrapper hasValue">
+                                            <input type="text" name="cepAddress" id="cep-address" maxlength="8"
+                                                minlength="8" required>
+                                            <div class="field-placeholder"><span>CEP</span></div>
+                                        </div>
+                                        <div class="field-wrapper hasValue">
+                                            <input type="text" name="streetAddress" id="street-address" disabled
+                                                required data-input>
+                                            <div class="field-placeholder"><span>Rua</span></div>
+                                        </div>
+                                        <div class="field-wrapper hasValue">
+                                            <input type="text" name="numberAddress" id="number-address" disabled
+                                                required data-input>
+                                            <div class="field-placeholder"><span>Numero</span></div>
+                                        </div>
+                                        <div class="field-wrapper hasValue">
+                                            <input type="text" name="city-address" id="city-address" disabled required
+                                                data-input>
+                                            <div class="field-placeholder"><span>Cidade</span></div>
+                                        </div>
+                                        <div class="field-wrapper hasValue">
+                                            <input type="text" name="neighborhood" id="neighborhood-adress" disabled
+                                                required data-input>
+                                            <div class="field-placeholder"><span>Bairro</span></div>
+                                        </div>
+                                        <div class="field-wrapper hasValue">
+                                            <input type="text" name="complement-address" id="complement-adress" disabled
+                                                data-input>
+                                            <div class="field-placeholder"><span>Complemento</span></div>
+                                        </div>
+                                        <div class="">
+                                            <select class="form-select shadow-none" id="state-adress" disabled required
+                                                data-input>
+                                                <option selected>Estado</option>
+                                                <option value="AC">Acre</option>
+                                                <option value="AL">Alagoas</option>
+                                                <option value="AP">Amapá</option>
+                                                <option value="AM">Amazonas</option>
+                                                <option value="BA">Bahia</option>
+                                                <option value="CE">Ceará</option>
+                                                <option value="DF">Distrito Federal</option>
+                                                <option value="ES">Espírito Santo</option>
+                                                <option value="GO">Goiás</option>
+                                                <option value="MA">Maranhão</option>
+                                                <option value="MT">Mato Grosso</option>
+                                                <option value="MS">Mato Grosso do Sul</option>
+                                                <option value="MG">Minas Gerais</option>
+                                                <option value="PA">Pará</option>
+                                                <option value="PB">Paraíba</option>
+                                                <option value="PR">Paraná</option>
+                                                <option value="PE">Pernambuco</option>
+                                                <option value="PI">Piauí</option>
+                                                <option value="RJ">Rio de Janeiro</option>
+                                                <option value="RN">Rio Grande do Norte</option>
+                                                <option value="RS">Rio Grande do Sul</option>
+                                                <option value="RO">Rondônia</option>
+                                                <option value="RR">Roraima</option>
+                                                <option value="SC">Santa Catarina</option>
+                                                <option value="SP">São Paulo</option>
+                                                <option value="SE">Sergipe</option>
+                                                <option value="TO">Tocantins</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
                 <%@include file="footer.jsp" %>
@@ -78,5 +164,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="./js/profile-page-details.js"></script>
+    <script src="./js/address-form.js"></script>
+    <script src="./js/toast.js"></script>
 
     </html>
