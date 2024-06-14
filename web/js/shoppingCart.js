@@ -2,8 +2,10 @@ const cartButtonOpen = document.getElementById('cart-button-open');
 const cartButtonClose = document.getElementById('cart-button-close');
 const background = document.getElementById('background-cart');
 let priceFooter = document.getElementById('total-price-footer');
+let cartQtd = document.querySelector('#cart-itens-qtd');
 const btnFinalize = document.getElementById("btn-finalize");
 const body = document.body;
+const element = document.querySelector('.list-group-item');
 
 //adiciona e remove a class 'active' do elemento
 function toggleMenu(event) {
@@ -116,7 +118,6 @@ function deleteItem(productId) {
             if (!contentType || !contentType.includes('application/json')) {
                 return null;
             }
-
             return response.json();
         })
         .catch(error => {
@@ -124,7 +125,17 @@ function deleteItem(productId) {
         });
     loadCart();
 }
-
+//verificar se o carrinho de compras tem conteudo
+function verifyCartList() {
+    const ul = document.querySelector(".list-group-item");
+    if (!ul.hasChildNodes()) {
+        btnFinalize.style.pointerEvents = "none";
+        btnFinalize.style.backgroundColor = "gray"
+    } else {
+        btnFinalize.style.pointerEvents = "all";
+        btnFinalize.style.backgroundColor = "rgb(0, 174, 174)"
+    }
+}
 //carrega os itens no carrinho de compras
 function loadCart() {
     fetch('./cart-itens')
@@ -135,11 +146,16 @@ function loadCart() {
             return response.json();
         })
         .then(data => {
-            if (data === "") {
-                btnFinalize.disabled = true;
-            }
+            let qtd;
+            if (data.length == "") { qtd = 1 }
+            data.forEach(cartItens => {
+                qtd = cartItens.quantity;
+            });
+            qtd += data.length;
+            cartQtd.textContent = qtd - 1;
             updateCartTotal(data);
             loadCartProduct(data);
+            verifyCartList();
         })
         .catch(error => {
             console.error(error);

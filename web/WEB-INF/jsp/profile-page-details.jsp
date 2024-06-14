@@ -59,76 +59,6 @@
                             </div>
                             <div class="address-list-container">
                                 <ul class="address-list">
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="address d-flex">
-                                            <h4>Rua Solimões</h4>
-                                            <span>Numero: 60, Bloco 05 apto 33</span>
-                                            <span>CEP 86025660 - Londrina,PR</span>
-                                            <div class="buttons-address">
-                                                <button class="btn btn-outline-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="container-buttons">
@@ -219,6 +149,27 @@
                                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                                         </div>
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="modal-delete-address" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Excluir Endereço</h5>
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Deseja realmente deletar o endereço?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-danger">Deletar</button>
                                 </div>
                             </div>
                         </div>

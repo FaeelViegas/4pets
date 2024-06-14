@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const productSearch = urlParams.get('search');
 const productCategory = urlParams.get('category');
+const searchText = document.querySelector('#search-text');
 
 function createProductCard(product) {
     const card = document.createElement('div');
@@ -8,7 +9,7 @@ function createProductCard(product) {
 
     // Converter os bytes da imagem para uma string Base64
     const base64Image = arrayBufferToBase64(product.image);
-    
+
     card.innerHTML = `
             <div class="card border-0">
                 <div class="card-body p-4">
@@ -117,7 +118,6 @@ function getProductDataByCategory(productCategory) {
         })
         .then(data => {
             loadProducts(data);
-            console.log(data)
         })
         .catch(error => {
             console.error('Erro:', error);
@@ -125,6 +125,7 @@ function getProductDataByCategory(productCategory) {
 }
 if (productSearch !== "") {
     getProductDataByName(productSearch);
+    searchText.textContent = productSearch;
 } else {
     getProductDataByCategory(productCategory);
 }

@@ -1,6 +1,8 @@
 package controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +15,10 @@ import model.bean.UserDTO;
 import model.dao.AddressDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "AddressController", urlPatterns = {"/insert-address"})
+@WebServlet(name = "AddressController", urlPatterns = {"/insert-address", "/addresses"})
 public class AddressController extends HttpServlet {
 
+    Gson gson = new Gson();
     AddressDTO objAddress = new AddressDTO();
     AddressDAO objAddressDao = new AddressDAO();
     UserDAO objUserDao = new UserDAO();
@@ -30,6 +33,19 @@ public class AddressController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String url = request.getServletPath();
+        if (url.equals("/addresses")) {
+            HttpSession session = request.getSession(false);
+            String user = (String) session.getAttribute("user");
+            objUser.setUserName(user);
+            int id = objUserDao.returnUserId(objUser);
+            List<AddressDTO> address = objAddressDao.read(id);
+            String json = gson.toJson(address);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
     }
 
     @Override
@@ -59,7 +75,7 @@ public class AddressController extends HttpServlet {
             objAddress.setStreet(street);
             objAddress.setUserId(id);
             objAddressDao.insertAddress(objAddress);
-            
+
             String path = "/WEB-INF/jsp/profile-page-details.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);

@@ -25,14 +25,15 @@ DROP TABLE IF EXISTS `adresses`;
 CREATE TABLE `adresses` (
   `id_adress` int(11) NOT NULL AUTO_INCREMENT,
   `street` varchar(155) DEFAULT NULL,
-  `number` smallint(6) DEFAULT NULL,
+  `number` varchar(15) DEFAULT NULL,
   `cep` char(9) DEFAULT NULL,
+  `city` varchar(75) DEFAULT NULL,
+  `neighborhood` varchar(75) DEFAULT NULL,
+  `state` varchar(75) DEFAULT NULL,
   `complement` varchar(155) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_adress`),
-  KEY `fk_user_id_adresses` (`user_id`),
-  CONSTRAINT `fk_user_id_adresses` FOREIGN KEY (`user_id`) REFERENCES `users` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id_adress`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +42,7 @@ CREATE TABLE `adresses` (
 
 LOCK TABLES `adresses` WRITE;
 /*!40000 ALTER TABLE `adresses` DISABLE KEYS */;
+INSERT INTO `adresses` VALUES (3,'Rua Solimões','45','86025660','Londrina','Jardim Agari','PR','bloco 05 apto 23',1);
 /*!40000 ALTER TABLE `adresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-14 20:38:57
+-- Dump completed on 2024-06-14 12:00:59
