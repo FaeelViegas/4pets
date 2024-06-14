@@ -29,7 +29,7 @@ function createAddressCard(address) {
             <span>Bairro: ${address.neighborhood}</span>
             <span>CEP ${address.cep} - ${address.city},${address.state}</span>
             <div class="buttons-address">
-                <button class="btn btn-outline-danger">Excluir</button>
+                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal-delete-address">Excluir</button>
             </div>
         </div>
     `;
