@@ -4,10 +4,21 @@ const streetInput = document.querySelector("#street-address");
 const cityInput = document.querySelector("#city-address");
 const neighborhoodInput = document.querySelector("#neighborhood-adress");
 const stateInput = document.querySelector("#state-adress");
+const numberInput = document.querySelector("#number-address");
 const formInputs = document.querySelectorAll("[data-input]");
 
 //Valida input do cep
 cepInput.addEventListener("keypress", (e) => {
+    const onlyNumbers = /[0-9]|\./;
+    const key = String.fromCharCode(e.keyCode);
+
+    if (!onlyNumbers.test(key)) {
+        e.preventDefault();
+        return;
+    }
+});
+
+numberInput.addEventListener("keypress", (e) => {
     const onlyNumbers = /[0-9]|\./;
     const key = String.fromCharCode(e.keyCode);
 
