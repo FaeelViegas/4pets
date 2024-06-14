@@ -59,7 +59,76 @@
                             </div>
                             <div class="address-list-container">
                                 <ul class="address-list">
-
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="address d-flex">
+                                            <h4>Rua Solimões</h4>
+                                            <span>Numero: 60, Bloco 05 apto 33</span>
+                                            <span>CEP 86025660 - Londrina,PR</span>
+                                            <div class="buttons-address">
+                                                <button class="btn btn-outline-danger">Excluir</button>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="container-buttons">
@@ -112,8 +181,8 @@
                                             <div class="field-placeholder"><span>Complemento</span></div>
                                         </div>
                                         <div class="">
-                                            <select name="state" class="form-select shadow-none" id="state-adress" disabled required
-                                                data-input>
+                                            <select name="state" class="form-select shadow-none" id="state-adress"
+                                                disabled required data-input>
                                                 <option selected>Estado</option>
                                                 <option value="AC">Acre</option>
                                                 <option value="AL">Alagoas</option>
