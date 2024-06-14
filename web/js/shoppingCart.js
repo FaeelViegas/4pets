@@ -2,9 +2,11 @@ const cartButtonOpen = document.getElementById('cart-button-open');
 const cartButtonClose = document.getElementById('cart-button-close');
 const background = document.getElementById('background-cart');
 let priceFooter = document.getElementById('total-price-footer');
+let cartQtd = document.querySelector('#cart-itens-qtd');
 const btnFinalize = document.getElementById("btn-finalize");
 const body = document.body;
 const element = document.querySelector('.list-group-item');
+
 //adiciona e remove a class 'active' do elemento
 function toggleMenu(event) {
     const cart = document.getElementById('shoppingCart');
@@ -116,7 +118,6 @@ function deleteItem(productId) {
             if (!contentType || !contentType.includes('application/json')) {
                 return null;
             }
-
             return response.json();
         })
         .catch(error => {
@@ -130,7 +131,7 @@ function verifyCartList() {
     if (!ul.hasChildNodes()) {
         btnFinalize.style.pointerEvents = "none";
         btnFinalize.style.backgroundColor = "gray"
-    }else{
+    } else {
         btnFinalize.style.pointerEvents = "all";
         btnFinalize.style.backgroundColor = "rgb(0, 174, 174)"
     }
@@ -145,9 +146,13 @@ function loadCart() {
             return response.json();
         })
         .then(data => {
-            if (data === "") {
-                btnFinalize.disabled = true;
-            }
+            let qtd;
+            if (data.length == "") { qtd = 1 }
+            data.forEach(cartItens => {
+                qtd = cartItens.quantity;
+            });
+            qtd += data.length;
+            cartQtd.textContent = qtd - 1;
             updateCartTotal(data);
             loadCartProduct(data);
             verifyCartList();

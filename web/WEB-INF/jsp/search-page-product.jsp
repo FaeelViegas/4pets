@@ -18,7 +18,7 @@
     <body>
         <%@include file="header.jsp" %>
             <main>
-                <h2>Resultados para <span>PRODUTO</span></h2>
+                <h2>Resultados para <span id="search-text">PRODUTO</span></h2>
                 <div class="container-products d-flex flex-wrap">
                 </div>
             </main>
