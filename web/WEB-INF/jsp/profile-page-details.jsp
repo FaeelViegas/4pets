@@ -80,7 +80,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="address-form" name="address-form">
+                                    <form id="address-form" name="address-form" action="insert-address" method="POST">
                                         <div class="field-wrapper hasValue">
                                             <input type="text" name="cepAddress" id="cep-address" maxlength="8"
                                                 minlength="8" required>
@@ -97,7 +97,7 @@
                                             <div class="field-placeholder"><span>Numero</span></div>
                                         </div>
                                         <div class="field-wrapper hasValue">
-                                            <input type="text" name="city-address" id="city-address" disabled required
+                                            <input type="text" name="cityAddress" id="city-address" disabled required
                                                 data-input>
                                             <div class="field-placeholder"><span>Cidade</span></div>
                                         </div>
@@ -107,12 +107,12 @@
                                             <div class="field-placeholder"><span>Bairro</span></div>
                                         </div>
                                         <div class="field-wrapper hasValue">
-                                            <input type="text" name="complement-address" id="complement-adress" disabled
+                                            <input type="text" name="complementAddress" id="complement-adress" disabled
                                                 data-input>
                                             <div class="field-placeholder"><span>Complemento</span></div>
                                         </div>
                                         <div class="">
-                                            <select class="form-select shadow-none" id="state-adress" disabled required
+                                            <select name="state" class="form-select shadow-none" id="state-adress" disabled required
                                                 data-input>
                                                 <option selected>Estado</option>
                                                 <option value="AC">Acre</option>
