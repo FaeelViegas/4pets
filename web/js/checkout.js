@@ -24,6 +24,23 @@ function createCartCard(cartItens) {
     return cardItem;
 }
 
+function createAddressCard(addressItens) {
+    const cardItem = document.createElement('div');
+    cardItem.classList.add('form-check');
+    cardItem.innerHTML = `
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault${addressItens.idAddress}" data-id="${addressItens.idAddress}">
+                <label class="form-check-label" for="flexRadioDefault${addressItens.idAddress}">
+                 <div id="${addressItens.idAddress}" class="address-selected d-flex flex-column">
+                    <h4>${addressItens.street}</h4>
+                    <span>Numero: ${addressItens.number}, ${addressItens.complement}</span>
+                    <span>Bairro: ${addressItens.neighborhood}</span>
+                    <span>CEP ${addressItens.cep} - ${addressItens.city},${addressItens.state}</span>
+                </div>
+            </label>
+    `;
+    return cardItem;
+}
+
 //calcula o valor total dos itens do carrinho
 function calculateTotalPrice(cartItens) {
     let totalPrice = 0;
@@ -31,11 +48,6 @@ function calculateTotalPrice(cartItens) {
         totalPrice += cartItens.priceUnitary * cartItens.quantity;
     });
     return totalPrice;
-}
-
-//atualiza o valor total do footer do carrinho
-function updateCartTotal(cartItens) {
-    //const totalPrice = calculateTotalPrice(cartItens);
 }
 
 //carrega os card dos itens do carrinho de compra
@@ -50,6 +62,16 @@ function loadCartProduct(cartItens) {
     });
 }
 
+function loadCartAddress(addressItens) {
+    const element = document.querySelector('.address-selection');
+
+    element.innerHTML = '';
+
+    addressItens.forEach(addressItens => {
+        const card = createAddressCard(addressItens);
+        element.appendChild(card);
+    });
+}
 //envia solicitação com a nova quantidade do item do carrinho de compra
 function sendQtd(productId, quantity) {
     if (quantity <= 0) {
@@ -114,12 +136,78 @@ function loadCart() {
             return response.json();
         })
         .then(data => {
-            console.log(data)
-            updateCartTotal(data);
             loadCartProduct(data);
         })
         .catch(error => {
             console.error(error);
         });
 }
+
+function loadAddress() {
+    fetch('./addresses')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao obter dados dos endereços');
+            }
+            return response.json();
+        })
+        .then(data => {
+            loadCartAddress(data);
+            localStorage.setItem('addresses', JSON.stringify(data)); // Armazenar endereços no localStorage
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function updateSelectedAddress(address) {
+    const selectedAddressDiv = document.getElementById('selectedAddress');
+    selectedAddressDiv.innerHTML = `
+        <h4>${address.street}</h4>
+        <span>Numero: ${address.number}, ${address.complement}</span>
+        <span>Bairro: ${address.neighborhood}</span>
+        <span>CEP ${address.cep} - ${address.city},${address.state}</span>
+    `;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const confirmAddressBtn = document.getElementById('confirmAddressBtn');
+
+    // Carrega endereços quando o modal é aberto
+    $('#address-modal-selection').on('show.bs.modal', loadAddress);
+
+    // Confirma o endereço selecionado
+    confirmAddressBtn.addEventListener('click', () => {
+        const selectedRadio = document.querySelector('.address-selection input[name="flexRadioDefault"]:checked');
+        if (selectedRadio) {
+            const selectedId = selectedRadio.getAttribute('data-id');
+            const addresses = JSON.parse(localStorage.getItem('addresses')); // Recuperar endereços do localStorage
+            const selectedAddress = addresses.find(addr => addr.idAddress == selectedId);
+            if (selectedAddress) {
+                updateSelectedAddress(selectedAddress);
+                $('#address-modal-selection').modal('hide');
+            } else {
+                console.error('Endereço selecionado não encontrado');
+            }
+        } else {
+            console.error('Nenhum endereço selecionado');
+        }
+    });
+});
+
+$(function () {
+
+    $(".field-wrapper .field-placeholder").on("click", function () {
+        $(this).closest(".field-wrapper").find("input").focus();
+    });
+    $(".field-wrapper input").on("keyup", function () {
+        var value = $.trim($(this).val());
+        if (value) {
+            $(this).closest(".field-wrapper").addClass("hasValue");
+        } else {
+            $(this).closest(".field-wrapper").removeClass("hasValue");
+        }
+    });
+});
+
 loadCart();
