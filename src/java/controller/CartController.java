@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.CartDTO;
 import model.bean.ShoppingCart;
 
-@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order"})
+@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page"})
 public class CartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -24,6 +24,10 @@ public class CartController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/finalize-order")) {
             String path = "/WEB-INF/jsp/checkout-page.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+            dispatcher.forward(request, response);
+        } else if (url.equals("/payment-page")) {
+            String path = "/WEB-INF/jsp/checkout-payment.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
         }
