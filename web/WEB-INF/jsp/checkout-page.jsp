@@ -48,15 +48,15 @@
                         <div class="resume d-flex p-3">
                             <div class="d-flex justify-content-between">
                                 <span>Valor total dos produtos:</span>
-                                <span id="total-value">R$ 0</span>
+                                <span class="values" id="total-value">R$ 0</span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span>Frete:</span>
-                                <span id="frete">R$ 0</span>
+                                <span class="values" id="frete">R$ 0</span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span>Total:</span>
-                                <span id="total-order">R$ 0</span>
+                                <span class="values" id="total-order">R$ 0</span>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="delivery">
                             <div class="address d-flex flex-column p-2">
                                 <div id="selectedAddress" class="address-selected d-flex flex-column">
-                                    <h4>SELECIONE UM ENDEREÇO!</h4>
+                                    <h4 class="text-center m-0">SELECIONE UM ENDEREÇO!</h4>
                                 </div>
                                 <div class="d-flex gap-3 mt-2">
                                     <button id="selectAddressBtn" data-toggle="modal"
@@ -133,7 +133,7 @@
                                         data-input>
                                     <div class="field-placeholder"><span>Complemento</span></div>
                                 </div>
-                                <div class="">
+                                <div class="d-flex justify-content-center">
                                     <select name="state" class="form-select shadow-none" id="state-adress" disabled
                                         required data-input>
                                         <option selected>Estado</option>

@@ -19,7 +19,7 @@ public class ProductDAO {
     
     public List<ProductDTO> read() {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image FROM products p LEFT JOIN images i ON p.id_product = i.product_id;";
+        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image, s.quantity FROM products p LEFT JOIN images i ON p.id_product = i.product_id LEFT JOIN stock s ON p.id_product = s.product_id;";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
@@ -35,6 +35,7 @@ public class ProductDAO {
                 objProduct.setCategoryId(rs.getInt("category_id"));
                 objProduct.setSellerId(rs.getInt("seller_id"));
                 objProduct.setImage(rs.getBytes("image"));
+                objProduct.setQuantity(rs.getInt("quantity"));
                 products.add(objProduct);
             }
             rs.close();

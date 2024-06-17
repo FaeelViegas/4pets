@@ -16,7 +16,7 @@ function createCartCard(cartItens) {
             </div>
             <div class="container-value-cart">
                 <span>R$${cartItens.priceUnitary.toFixed(2)}</span>
-                <input id="qtd-input" onclick="sendQtd(${cartItens.idProduct}, this.value)" type="number" value="${cartItens.quantity}" min="0" max="10" step="1" />
+                <input id="qtd-input" onclick="sendQtd(${cartItens.idProduct}, this.value)" type="number" value="${cartItens.quantity}" min="0" max="${cartItens.stock}" step="1" />
                 <span>R$ ${totalPrice.toFixed(2)}</span>
             </div>
         </section>
@@ -72,6 +72,23 @@ function loadCartAddress(addressItens) {
         element.appendChild(card);
     });
 }
+
+//calcula o valor total dos itens do carrinho
+function calculateTotalPrice(cartItens) {
+    let totalPrice = 0;
+    cartItens.forEach(cartItens => {
+        totalPrice += cartItens.priceUnitary * cartItens.quantity;
+    });
+    return totalPrice;
+}
+
+//atualiza o valor total do footer do carrinho
+function updateCartTotal(cartItens) {
+    const priceProducts = document.querySelector('#total-value');
+    const totalPrice = calculateTotalPrice(cartItens);
+    priceProducts.textContent = "R$ " + totalPrice.toFixed(2);
+}
+
 //envia solicitação com a nova quantidade do item do carrinho de compra
 function sendQtd(productId, quantity) {
     if (quantity <= 0) {
@@ -137,6 +154,7 @@ function loadCart() {
         })
         .then(data => {
             loadCartProduct(data);
+            updateCartTotal(data);
         })
         .catch(error => {
             console.error(error);
