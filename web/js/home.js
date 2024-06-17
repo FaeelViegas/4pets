@@ -19,7 +19,7 @@ function createProductCard(product) {
             </a>
             <div class="btn-container d-flex justify-content-center">
                 <button class="btn-card"
-                    onclick="addToCart(${product.idProduct}, '${product.name}', ${product.price},'${base64Image}')">Adicionar
+                    onclick="addToCart(${product.idProduct}, '${product.name}', ${product.price},'${base64Image}','${product.quantity}')">Adicionar
                     ao carrinho</button>
             </div>
         </div>
@@ -28,14 +28,16 @@ function createProductCard(product) {
     return card;
 }
 
-function addToCart(productId, productName, productPrice, productImage) {
+function addToCart(productId, productName, productPrice, productImage, stock) {
     const data = {
         productId: productId,
         productName: productName,
         productPrice: productPrice,
         productImage: productImage,
+        stock: stock,
         productQtd: 1
     };
+    console.log(data)
     fetch('./add-product-cart', {
         method: 'POST',
         headers: {

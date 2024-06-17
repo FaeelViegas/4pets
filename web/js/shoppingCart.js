@@ -38,7 +38,7 @@ function createCartCard(cartItens) {
             </div>
             <div class="container-value-cart">
                 <span>R$${cartItens.priceUnitary.toFixed(2)}</span>
-                <input id="qtd-input" onclick="sendQtd(${cartItens.idProduct}, this.value)" type="number" value="${cartItens.quantity}" min="0" max="10" step="1" />
+                <input id="qtd-input" onclick="sendQtd(${cartItens.idProduct}, this.value)" type="number" value="${cartItens.quantity}" min="0" max="${cartItens.stock}" step="1" />
                 <span>R$ ${totalPrice.toFixed(2)}</span>
             </div>
         </section>

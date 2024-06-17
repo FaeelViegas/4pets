@@ -7,16 +7,18 @@ public class CartDTO {
     private int idProduct;
     private String name;
     private int quantity;
+    private int stock;
     private double priceUnitary;
     private JsonString image;
 
     public CartDTO() {
     }
 
-    public CartDTO(int idProduct, String name, int quantity, double priceUnitary, JsonString image) {
+    public CartDTO(int idProduct, String name, int quantity, int stock, double priceUnitary, JsonString image) {
         this.idProduct = idProduct;
         this.name = name;
         this.quantity = quantity;
+        this.stock = stock;
         this.priceUnitary = priceUnitary;
         this.image = image;
     }
@@ -43,6 +45,14 @@ public class CartDTO {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public double getPriceUnitary() {

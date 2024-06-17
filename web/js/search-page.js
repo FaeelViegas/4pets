@@ -22,7 +22,7 @@ function createProductCard(product) {
                     </div>
                    </a> 
                     <div class="btn-container d-flex justify-content-center">
-                        <button class="btn-card" onclick="addToCart(${product.idProduct}, '${product.name}', ${product.price},'${base64Image}')">Adicionar ao carrinho</button>
+                        <button class="btn-card" onclick="addToCart(${product.idProduct}, '${product.name}', ${product.price},'${base64Image}','${product.quantity}')">Adicionar ao carrinho</button>
                     </div>
                 </div>
         </div>
@@ -40,12 +40,13 @@ function arrayBufferToBase64(buffer) {
     return window.btoa(binary);
 }
 
-function addToCart(productId, productName, productPrice, productImage) {
+function addToCart(productId, productName, productPrice, productImage,stock) {
     const data = {
         productId: productId,
         productName: productName,
         productPrice: productPrice,
         productImage: productImage,
+        stock: stock,
         productQtd: 1
     };
     fetch('./add-product-cart', {

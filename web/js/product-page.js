@@ -63,7 +63,7 @@ function createProduct(product) {
                 </div>
                 <div class="d-flex justify-content-around">
                     <span>Quantas unidades?</span>
-                    <input id="qtd-input" type="number" value="1" min="1" max="${product.quantity}" step="1" />
+                    <input id="qtd-input" type="number" value="${product.quantity}" min="1" max="" step="1" />
                 </div>
                 <div class="d-flex justify-content-center pt-3 pb-3">
                     <button class="btn-add">Adicionar ao carrinho</button>

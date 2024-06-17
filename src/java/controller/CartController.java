@@ -66,6 +66,7 @@ public class CartController extends HttpServlet {
                 productName = new String(productName.getBytes("ISO-8859-1"), "UTF-8");
                 double productPrice = jsonObject.getJsonNumber("productPrice").doubleValue();
                 int productQtd = jsonObject.getInt("productQtd");
+                String stock = jsonObject.getString("stock");
                 JsonString productImage = jsonObject.getJsonString("productImage");
                 CartDTO objCart = new CartDTO();
                 List<CartDTO> cartItens = ShoppingCart.getInstance().getCarrinhoItens();
@@ -84,6 +85,7 @@ public class CartController extends HttpServlet {
                     objCart.setName(productName);
                     objCart.setPriceUnitary(productPrice);
                     objCart.setQuantity(productQtd);
+                    objCart.setStock(Integer.parseInt(stock));
                     objCart.setImage(productImage);
                     ShoppingCart.getInstance().addItem(objCart);
                 }
