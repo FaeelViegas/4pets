@@ -37,7 +37,6 @@ function addToCart(productId, productName, productPrice, productImage, stock) {
         stock: stock,
         productQtd: 1
     };
-    console.log(data)
     fetch('./add-product-cart', {
         method: 'POST',
         headers: {

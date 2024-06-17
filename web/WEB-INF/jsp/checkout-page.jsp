@@ -9,7 +9,7 @@
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Checkout</title>
+        <title>Revisão</title>
         <link rel="stylesheet" href="./styles/checkout.css">
     </head>
 
@@ -82,7 +82,7 @@
                     </div>
                     <div class="payment-container">
                         <div class="button-container">
-                            <a href="#" class="btn btn-success">IR PARA O PAGAMENTO</a>
+                            <a href="./payment-page" class="btn btn-success">IR PARA O PAGAMENTO</a>
                         </div>
                         <div class="back-container">
                             <a href="./home">VOLTAR AS COMPRAS</a>
@@ -213,6 +213,5 @@
         crossorigin="anonymous"></script>
     <script src="./js/checkout.js"></script>
     <script src="./js/address-form.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     </html>
