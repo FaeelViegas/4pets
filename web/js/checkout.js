@@ -41,6 +41,29 @@ function createAddressCard(addressItens) {
     return cardItem;
 }
 
+function createShippingCard(shippingItens) {
+    const cardItem = document.createElement('div');
+    cardItem.classList.add('shipping-option');
+    cardItem.innerHTML = `
+            <input type="radio" class="shippingSelected" id="shipping_${shippingItens.id}" name="shipping" data-price="${shippingItens.custom_price}">
+            <label for="shipping_${shippingItens.id}">
+            <span class="radio-custom"></span>
+             <div class="shipping-details">
+                <div class="shipping-info">
+                   <p class="shipping-method">${shippingItens.name}</p>
+                   <p class="shipping-time">Chega em ${shippingItens.delivery_time} dias</p>
+                 </div>
+                 <div class="shipping-price-logo">
+                       <p class="shipping-price">R$ ${shippingItens.custom_price}</p>
+                       <img src="${shippingItens.company.picture}"
+                        alt="${shippingItens.company.name} logo" class="logo">
+                    </div>
+                </div>
+            </label>
+    `;
+    return cardItem;
+}
+
 //calcula o valor total dos itens do carrinho
 function calculateTotalPrice(cartItens) {
     let totalPrice = 0;
@@ -51,7 +74,7 @@ function calculateTotalPrice(cartItens) {
 }
 
 //carrega os card dos itens do carrinho de compra
-function loadCartProduct(cartItens) {
+function loadCardProduct(cartItens) {
     const element = document.querySelector('.list-group-item');
 
     element.innerHTML = '';
@@ -62,7 +85,7 @@ function loadCartProduct(cartItens) {
     });
 }
 
-function loadCartAddress(addressItens) {
+function loadCardAddress(addressItens) {
     const element = document.querySelector('.address-selection');
 
     element.innerHTML = '';
@@ -70,6 +93,33 @@ function loadCartAddress(addressItens) {
     addressItens.forEach(addressItens => {
         const card = createAddressCard(addressItens);
         element.appendChild(card);
+    });
+}
+
+function loadCardShipping(shippingItems) {
+    const element = document.querySelector('.shipping-selection');
+
+    element.innerHTML = '';
+
+    shippingItems.forEach(shippingItem => {
+        // Verifica se o nome do frete contém "Mini"
+        if (!shippingItem.name.includes('Mini')) {
+            const card = createShippingCard(shippingItem);
+            element.appendChild(card);
+        }
+    });
+
+    // Adiciona um evento de escuta para capturar a seleção do usuário
+    const shippingInputs = document.querySelectorAll('.shippingSelected');
+    shippingInputs.forEach(input => {
+        input.addEventListener('change', function () {
+            if (this.checked) {
+                const selectedPrice = this.getAttribute('data-price');
+                const priceShipping = document.querySelector('#frete');
+                priceShipping.textContent = "R$ " + selectedPrice;
+                totalOrder();
+            }
+        });
     });
 }
 
@@ -87,6 +137,18 @@ function updateCartTotal(cartItens) {
     const priceProducts = document.querySelector('#total-value');
     const totalPrice = calculateTotalPrice(cartItens);
     priceProducts.textContent = "R$ " + totalPrice.toFixed(2);
+    totalOrder();
+}
+
+function totalOrder() {
+    let valorProdutosStr = document.getElementById('total-value').innerText;
+    let freteStr = document.getElementById('frete').innerText;
+
+    let valorProdutos = parseFloat(valorProdutosStr.replace('R$ ', ''));
+    let frete = parseFloat(freteStr.replace('R$ ', ''));
+    let totalPedido = valorProdutos + frete;
+
+    document.getElementById('total-order').innerText = 'R$ ' + totalPedido.toFixed(2);
 }
 
 //envia solicitação com a nova quantidade do item do carrinho de compra
@@ -153,7 +215,7 @@ function loadCart() {
             return response.json();
         })
         .then(data => {
-            loadCartProduct(data);
+            loadCardProduct(data);
             updateCartTotal(data);
         })
         .catch(error => {
@@ -170,7 +232,7 @@ function loadAddress() {
             return response.json();
         })
         .then(data => {
-            loadCartAddress(data);
+            loadCardAddress(data);
             localStorage.setItem('addresses', JSON.stringify(data)); // Armazenar endereços no localStorage
         })
         .catch(error => {
@@ -184,7 +246,7 @@ function updateSelectedAddress(address) {
         <h4>${address.street}</h4>
         <span>Numero: ${address.number}, ${address.complement}</span>
         <span>Bairro: ${address.neighborhood}</span>
-        <span>CEP ${address.cep} - ${address.city},${address.state}</span>
+        <span>CEP <span id="cep-selected">${address.cep}</span> - ${address.city},${address.state}</span>
     `;
 }
 
@@ -226,6 +288,35 @@ $(function () {
             $(this).closest(".field-wrapper").removeClass("hasValue");
         }
     });
+});
+
+document.getElementById("confirmAddressBtn").addEventListener("click", function () {
+    setTimeout(() => {
+        const spanElement = document.querySelector('#cep-selected');
+        const spanValue = spanElement.innerText;
+        fetch('./calculate-shipping', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                'toPostalCode': spanValue
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter dados de frete');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                loadCardShipping(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, "50");
 });
 
 loadCart();

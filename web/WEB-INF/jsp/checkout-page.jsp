@@ -48,15 +48,15 @@
                         <div class="resume d-flex p-3">
                             <div class="d-flex justify-content-between">
                                 <span>Valor total dos produtos:</span>
-                                <span class="values" id="total-value">R$ 0</span>
+                                <span class="values" id="total-value"><span>R$ </span>0.00</span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span>Frete:</span>
-                                <span class="values" id="frete">R$ 0</span>
+                                <span class="values" id="frete"><span>R$ </span>0.00</span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span>Total:</span>
-                                <span class="values" id="total-order">R$ 0</span>
+                                <span class="values" id="total-order"><span>R$ </span>0.00</span>
                             </div>
                         </div>
                     </div>
@@ -76,6 +76,10 @@
                                         class="btn btn-outline-primary">Selecionar</button>
                                     <button id="registerAddressBtn" data-toggle="modal" data-target="#address-modal"
                                         class="btn btn-outline-primary">Cadastrar</button>
+                                </div>
+                            </div>
+                            <div class="shipping-container">
+                                <div class="shipping-selection d-flex p-3 gap-3 flex-column">
                                 </div>
                             </div>
                         </div>
