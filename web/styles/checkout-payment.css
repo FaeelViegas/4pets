@@ -136,4 +136,14 @@
         color: #1b5151;
     }
 
+    .payment-method {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .payment-method.active {
+        border-color: #007bff;
+    }
 }
