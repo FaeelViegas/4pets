@@ -4,41 +4,54 @@ function togglePaymentDetails() {
     creditCardDetails.style.display = isCreditCardSelected ? 'block' : 'none';
 }
 
+function validateCardNumber(input) {
+    // Remove não-dígitos do número do cartão
+    input.value = input.value.replace(/\D/g, '');
+}
+function validateCpfNumber(input) {
+    // Remove não-dígitos do número do cpf
+    input.value = input.value.replace(/\D/g, '');
+}
+function validateCvvNumber(input) {
+    // Remove não-dígitos do número do cvv
+    input.value = input.value.replace(/\D/g, '');
+}
 function validateForm() {
-    const cardNumber = document.getElementById('cardNumber').value;
-    const cardName = document.getElementById('cardName').value;
+    const cardName = document.getElementById('cardName').value.trim();
     const cardExpiry = document.getElementById('cardExpiry').value;
-    const cardCVV = document.getElementById('cardCVV').value;
-    const cardCPF = document.getElementById('cardCPF').value;
 
     const today = new Date();
     const expiryDate = new Date(cardExpiry + "-01");
 
-    if (!cardNumber.match(/^\d{16}$/)) {
-        alert("Número do Cartão inválido. Deve ter 16 dígitos.");
+    // Validação do nome do titular do cartão
+    if (cardName === "") {
         return false;
     }
 
-    if (cardName.trim() === "") {
-        alert("Nome Impresso no Cartão é obrigatório.");
-        return false;
-    }
-
+    // Validação da data de expiração (deve ser uma data futura)
     if (expiryDate < today) {
-        alert("Data de Validade inválida. Deve ser uma data futura.");
         return false;
     }
-
-    if (!cardCVV.match(/^\d{3}$/)) {
-        alert("Código de Verificação inválido. Deve ter 3 dígitos.");
-        return false;
-    }
-
-    if (!cardCPF.match(/^\d{11}$/)) {
-        alert("CPF/CNPJ do titular inválido. Deve ter 11 dígitos.");
-        return false;
-    }
-
-    // Se todas as validações passarem
     return true;
 }
+
+// Adiciona os event listeners para validar enquanto o usuário digita
+document.getElementById('cardNumber').addEventListener('input', function () {
+    validateCardNumber(this);
+});
+
+document.getElementById('cardName').addEventListener('input', function () {
+    validateForm();
+});
+
+document.getElementById('cardExpiry').addEventListener('input', function () {
+    validateForm();
+});
+
+document.getElementById('cardCVV').addEventListener('input', function () {
+    validateCvvNumber(this);
+});
+
+document.getElementById('cardCPF').addEventListener('input', function () {
+    validateCardNumber(this);
+});

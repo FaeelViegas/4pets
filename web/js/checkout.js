@@ -102,8 +102,8 @@ function loadCardShipping(shippingItems) {
     element.innerHTML = '';
 
     shippingItems.forEach(shippingItem => {
-        // Verifica se o nome do frete contém "Mini"
-        if (!shippingItem.name.includes('Mini')) {
+        // Verifica se o nome do frete contém "Mini" e verifica se vem o atributo error
+        if (!shippingItem.name.includes('Mini') && (!shippingItem.error || shippingItem.error.trim() === '')) {
             const card = createShippingCard(shippingItem);
             element.appendChild(card);
         }

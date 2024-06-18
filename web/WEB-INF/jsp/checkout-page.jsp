@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Revisão</title>
         <link rel="stylesheet" href="./styles/checkout.css">
+        <link rel="stylesheet" href="./styles/progress-bar.css">
     </head>
 
     <body>
@@ -24,6 +25,24 @@
             </div>
         </header>
         <main>
+            <div class="progress-container">
+                <div class="step cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div class="text">Carrinho</div>
+                </div>
+                <div class="step payment">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <div class="text">Pagamento</div>
+                </div>
+                <div class="step confirm">
+                    <i class="fa-solid fa-eye"></i>
+                    <div class="text">Confirmação</div>
+                </div>
+                <div class="step conclusion">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div class="text">Concluir</div>
+                </div>
+            </div>
             <div class="container">
                 <div class="container-left">
                     <div class="cart-container">
@@ -106,7 +125,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="address-form" name="address-form" action="insert-address" method="POST">
+                            <form id="address-form" name="address-form" action="insert-address-checkout" method="POST">
                                 <div class="field-wrapper hasValue">
                                     <input type="text" name="cepAddress" id="cep-address" maxlength="8" minlength="8"
                                         required>

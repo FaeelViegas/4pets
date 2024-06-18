@@ -17,6 +17,8 @@
     .header-container {
         display: flex;
         flex-direction: row;
+        height: 40px;
+        align-items: center;
     }
 
     .header-container i {
@@ -88,7 +90,8 @@
     .payment-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 40px 1fr;
+        padding: 10px;
     }
 
     .button-container {
@@ -145,5 +148,30 @@
 
     .payment-method.active {
         border-color: #007bff;
+    }
+
+    .step.payment .text {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.payment i {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.cart .text {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.cart i {
+        color: rgb(0, 166, 166);
+    }
+
+    .cart::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(0, 166, 166);
+        transform: translateX(80%);
     }
 }
