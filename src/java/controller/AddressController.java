@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.bean.AddressDTO;
+import model.bean.MelhorEnvioAPI;
 import model.bean.UserDTO;
 import model.dao.AddressDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "AddressController", urlPatterns = {"/insert-address", "/addresses"})
+@WebServlet(name = "AddressController", urlPatterns = {"/insert-address", "/addresses", "/calculate-shipping"})
 public class AddressController extends HttpServlet {
 
+    MelhorEnvioAPI melhorEnvioAPI = new MelhorEnvioAPI();
     Gson gson = new Gson();
     AddressDTO objAddress = new AddressDTO();
     AddressDAO objAddressDao = new AddressDAO();
@@ -79,6 +81,20 @@ public class AddressController extends HttpServlet {
             String path = "/WEB-INF/jsp/profile-page-details.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
             dispatcher.forward(request, response);
+        } else if (url.equals("/calculate-shipping")) {
+            // Chamar a API de frete
+            String toPostalCode = request.getParameter("toPostalCode");
+            try {
+                String shippingResponse = melhorEnvioAPI.calcularFrete(toPostalCode);
+                System.out.println("Resposta do frete: " + shippingResponse);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(shippingResponse);
+            } catch (IOException e) {
+                e.printStackTrace();
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao calcular frete");
+            }
         }
     }
 }
