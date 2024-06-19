@@ -15,24 +15,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.bean.CartDTO;
+import model.bean.OrderDTO;
+import model.bean.OrderManager;
 import model.bean.ShoppingCart;
+import model.bean.UserDTO;
+import model.dao.UserDAO;
 
-@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page"})
+@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order"})
 public class CartController extends HttpServlet {
+
+    UserDAO objUserDao = new UserDAO();
+    UserDTO objUser = new UserDTO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getServletPath();
-        if (url.equals("/finalize-order")) {
-            String path = "/WEB-INF/jsp/checkout-page.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-            dispatcher.forward(request, response);
-        } else if (url.equals("/payment-page")) {
-            String path = "/WEB-INF/jsp/checkout-payment.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-            dispatcher.forward(request, response);
+        switch (url) {
+            case "/finalize-order": {
+                String path = "/WEB-INF/jsp/checkout-page.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/payment-page": {
+                String path = "/WEB-INF/jsp/checkout-payment.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/confirmation-page": {
+                String path = "/WEB-INF/jsp/checkout-confirmation.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            default:
+                break;
         }
-
     }
 
     @Override
@@ -41,17 +60,51 @@ public class CartController extends HttpServlet {
         processRequest(request, response);
         String path = request.getServletPath();
         if (path.equals("/cart-itens")) {
-            // Obtém a sessão do usuário e o carrinho de compras
+            // Obtem a sessão do carrinho de compras
             HttpSession session = request.getSession();
             ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
 
-            List<CartDTO> cartItens = cart.getCarrinhoItens();
+            if (cart == null) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("[]"); // Retorna um array vazio em JSON
+                return;
+            }
+
+            List<CartDTO> cartItems = cart.getCarrinhoItens();
             Gson gson = new Gson();
-            String json = gson.toJson(cartItens);
+            String json = gson.toJson(cartItems);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+        } else if (path.equals("/get-orders")) {
+            try {
+                // Obtém a sessão do usuário e o gerenciador de pedidos
+                HttpSession session = request.getSession();
+                OrderManager orderManager = (OrderManager) session.getAttribute("orderManager");
+
+                if (orderManager == null) {
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("[]"); // Retorna um array vazio em JSON
+                    return;
+                }
+                // Obtém a lista de pedidos
+                List<OrderDTO> orders = orderManager.getOrders();
+
+                // Converte a lista de pedidos para JSON
+                Gson gson = new Gson();
+                String json = gson.toJson(orders);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("Erro interno ao processar a solicitação.");
+            }
         }
     }
 
@@ -113,6 +166,138 @@ public class CartController extends HttpServlet {
 
                 javax.json.JsonObject responseJson = Json.createObjectBuilder()
                         .add("message", "Produto adicionado ao carrinho com sucesso!")
+                        .build();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(responseJson.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("Erro interno ao processar a solicitação.");
+            }
+        } else if (path.equals("/add-order")) {
+            try {
+                // Lê os dados do pedido da requisição
+                BufferedReader reader = request.getReader();
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                String json = sb.toString();
+
+                // Pega os dados do JSON para criar um novo pedido
+                javax.json.JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
+                String street = jsonObject.getString("street");
+                String number = jsonObject.getString("number");
+                String cep = jsonObject.getString("cep");
+                String city = jsonObject.getString("city");
+                String neighborhood = jsonObject.getString("neighborhood");
+                String state = jsonObject.getString("state");
+                String complement = jsonObject.getString("complement");
+                double productValue = jsonObject.getJsonNumber("productValue").doubleValue();
+                double shippingValue = jsonObject.getJsonNumber("shippingValue").doubleValue();
+                double totalValue = jsonObject.getJsonNumber("totalValue").doubleValue();
+                JsonString idAddress = jsonObject.getJsonString("idAddress");
+
+                // Cria um novo objeto OrderDTO
+                OrderDTO order = new OrderDTO();
+
+                // Obtém a sessão do usuário e o gerenciador de pedidos
+                HttpSession session = request.getSession();
+                OrderManager orderManager = (OrderManager) session.getAttribute("orderManager");
+                String user = (String) session.getAttribute("user");
+                objUser.setUserName(user);
+                int id = objUserDao.returnUserId(objUser);
+
+                // Se o gerenciador de pedidos não existir na sessão, cria um novo e armazena na sessão
+                if (orderManager == null) {
+                    orderManager = new OrderManager();
+                    session.setAttribute("orderManager", orderManager);
+                }
+
+                // Define os campos do pedido
+                order.setAddressId(idAddress);
+                order.setCep(cep);
+                order.setCity(city);
+                order.setComplement(complement);
+                order.setNeighborhood(neighborhood);
+                order.setNumber(number);
+                order.setProductValue(productValue);
+                order.setShippingValue(shippingValue);
+                order.setState(state);
+                order.setStreet(street);
+                order.setTotalValue(totalValue);
+                order.setUserId(id);
+
+                // Verifica se já existe um pedido para o usuário e atualiza ou adiciona
+                if (orderManager.hasOrderForUser(id)) {
+                    orderManager.updateOrder(order);
+                } else {
+                    orderManager.addOrder(order);
+                }
+
+                // Cria a resposta JSON
+                javax.json.JsonObject responseJson = Json.createObjectBuilder()
+                        .add("message", "Pedido criado/atualizado com sucesso!")
+                        .build();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(responseJson.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("Erro interno ao processar a solicitação.");
+            }
+        } else if (path.equals("/update-order")) {
+            try {
+                // Lê os dados do pedido da requisição
+                BufferedReader reader = request.getReader();
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                String json = sb.toString();
+
+                // pega os dados do JSON para criar um novo pedido
+                javax.json.JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
+                String methodPayment = jsonObject.getString("methodPayment");
+
+                // Obtém a sessão do usuário e o gerenciador de pedidos
+                HttpSession session = request.getSession();
+                OrderManager orderManager = (OrderManager) session.getAttribute("orderManager");
+                String user = (String) session.getAttribute("user");
+
+                // Valida se o gerenciador de pedidos existe na sessão
+                if (orderManager == null) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.getWriter().write("Gerenciador de pedidos não encontrado.");
+                    return;
+                }
+
+                // Obtém o ID do usuário
+                objUser.setUserName(user);
+                int userId = objUserDao.returnUserId(objUser);
+
+                // Localiza o pedido existente para o usuário
+                OrderDTO existingOrder = orderManager.getOrderForUser(userId);
+
+                if (existingOrder == null) {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    response.getWriter().write("Pedido não encontrado para o usuário.");
+                    return;
+                }
+
+                // Atualiza o pedido existente com os novos campos
+                existingOrder.setMethodPayment(methodPayment);
+
+                // Salva o pedido atualizado no gerenciador de pedidos
+                orderManager.updateOrder(existingOrder);
+
+                // Resposta de sucesso
+                javax.json.JsonObject responseJson = Json.createObjectBuilder()
+                        .add("message", "Pedido atualizado com sucesso!")
                         .build();
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");

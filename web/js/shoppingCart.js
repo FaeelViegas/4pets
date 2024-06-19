@@ -1,12 +1,3 @@
-const cartButtonOpen = document.getElementById('cart-button-open');
-const cartButtonClose = document.getElementById('cart-button-close');
-const background = document.getElementById('background-cart');
-let priceFooter = document.getElementById('total-price-footer');
-let cartQtd = document.querySelector('#cart-itens-qtd');
-const btnFinalize = document.getElementById("btn-finalize");
-const body = document.body;
-const element = document.querySelector('.list-group-item');
-
 //adiciona e remove a class 'active' do elemento
 function toggleMenu(event) {
     const cart = document.getElementById('shoppingCart');
@@ -15,10 +6,6 @@ function toggleMenu(event) {
     background.classList.toggle('active');
     body.classList.toggle('no-scroll');
 }
-
-cartButtonOpen.addEventListener('click', toggleMenu);
-cartButtonClose.addEventListener('click', toggleMenu);
-background.addEventListener('click', toggleMenu);
 
 //cria os card com base nos dados do carrinho de compra
 function createCartCard(cartItens) {
@@ -118,8 +105,6 @@ function sendUpdateRequest(productId, quantity) {
         });
 }
 
-
-
 //envia soicitação para a remoção do item do carrinho de compras
 function deleteItem(productId) {
     fetch('./delete-item-cart?productId=' + productId, {
@@ -148,10 +133,10 @@ function verifyCartList() {
     const ul = document.querySelector(".list-group-item");
     if (!ul.hasChildNodes()) {
         btnFinalize.style.pointerEvents = "none";
-        btnFinalize.style.backgroundColor = "gray"
+        btnFinalize.style.backgroundColor = "gray";
     } else {
         btnFinalize.style.pointerEvents = "all";
-        btnFinalize.style.backgroundColor = "rgb(0, 174, 174)"
+        btnFinalize.style.backgroundColor = "rgb(0, 174, 174)";
     }
 }
 //carrega os itens no carrinho de compras
@@ -179,4 +164,20 @@ function loadCart() {
             console.error(error);
         });
 }
-loadCart();
+
+const cartButtonOpen = document.getElementById('cart-button-open');
+const cartButtonClose = document.getElementById('cart-button-close');
+const background = document.getElementById('background-cart');
+let priceFooter = document.getElementById('total-price-footer');
+let cartQtd = document.querySelector('#cart-itens-qtd');
+const btnFinalize = document.getElementById("btn-finalize");
+const body = document.body;
+const element = document.querySelector('.list-group-item');
+cartButtonOpen.addEventListener('click', toggleMenu);
+cartButtonClose.addEventListener('click', toggleMenu);
+background.addEventListener('click', toggleMenu);
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    verifyCartList();
+    loadCart();
+});

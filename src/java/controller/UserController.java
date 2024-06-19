@@ -40,9 +40,7 @@ public class UserController extends HttpServlet {
                 String user = request.getParameter("user");
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                String path = "/WEB-INF/jsp/index.jsp";
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
-                dispatcher.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/home");
                 break;
             }
             case "/home": {

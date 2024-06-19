@@ -3,6 +3,7 @@
     <html lang="pt-br">
 
     <head>
+        <link rel="stylesheet" href="./styles/toast.css">
         <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
         <script src="https://kit.fontawesome.com/52a6b206fa.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,6 +16,7 @@
     </head>
 
     <body>
+        <div class="notifications"></div>
         <header>
             <div class="header-container">
                 <div class="logo-container">
@@ -51,7 +53,7 @@
                             <span>METODO DE PAGAMENTO</span>
                         </div>
                         <div class="container-method mt-1">
-                            <form onkeyup="return validateForm()">
+                            <form>
                                 <div class="payment-method">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="pix" name="paymentMethod" class="custom-control-input"
@@ -69,29 +71,31 @@
                                         <div class="form-group mt-3">
                                             <label for="cardNumber">Número do Cartão</label>
                                             <input type="text" class="form-control" id="cardNumber"
-                                                placeholder="Número do Cartão" maxlength="16" minlength="16" required>
+                                                placeholder="Número do Cartão" maxlength="16" minlength="16" required
+                                                onkeyup="validateForm()">
                                         </div>
                                         <div class="form-group">
                                             <label for="cardName">Nome Impresso no Cartão</label>
                                             <input type="text" class="form-control" id="cardName"
-                                                placeholder="Nome Impresso no Cartão" required>
+                                                placeholder="Nome Impresso no Cartão" required onkeyup="validateForm()">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="cardExpiry">Validade</label>
                                                 <input type="month" class="form-control" id="cardExpiry"
-                                                    placeholder="MM/AA" required>
+                                                    placeholder="MM/AA" required onchange="validateForm()">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="cardCVV">Código de Verificação</label>
                                                 <input type="text" class="form-control" id="cardCVV" placeholder="CVV"
-                                                    maxlength="3" minlength="3" required>
+                                                    maxlength="3" minlength="3" required onkeyup="validateForm()">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="cardCPF">CPF do titular</label>
                                             <input type="text" class="form-control" id="cardCPF"
-                                                placeholder="CPF do titular" maxlength="11" minlength="11" required>
+                                                placeholder="CPF do titular" maxlength="11" minlength="11" required
+                                                onkeyup="validateForm()">
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +125,8 @@
                     </div>
                     <div class="confirm-container">
                         <div class="button-container">
-                            <a href="./payment-page" class="btn btn-success">CONTINUAR</a>
+                            <a onclick="sendOrder()" a href="./confirmation-page" id="payment-button"
+                                class="btn btn-success">CONTINUAR</a>
                         </div>
                         <div class="back-container">
                             <a href="./finalize-order">VOLTAR</a>
@@ -141,5 +146,6 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="./js/checkout-payment.js"></script>
+    <script src="./js/toast.js"></script>
 
     </html>
