@@ -16,7 +16,8 @@ function createCartCard(cartItens) {
             </div>
             <div class="container-value-cart">
                 <span>R$${cartItens.priceUnitary.toFixed(2)}</span>
-                <input id="qtd-input" onclick="sendQtd(${cartItens.idProduct}, this.value)" type="number" value="${cartItens.quantity}" min="0" max="${cartItens.stock}" step="1" />
+                <input id="qtd-input-${cartItens.idProduct}" type="number" value="${cartItens.quantity}" min="0" max="${cartItens.stock}" step="1"
+               oninput="handleQuantityChange(${cartItens.idProduct}, this.value)" />
                 <span>R$ ${totalPrice.toFixed(2)}</span>
             </div>
         </section>
@@ -151,8 +152,19 @@ function totalOrder() {
     document.getElementById('total-order').innerText = 'R$ ' + totalPedido.toFixed(2);
 }
 
-//envia solicitação com a nova quantidade do item do carrinho de compra
-function sendQtd(productId, quantity) {
+// Função para lidar com a mudança na quantidade
+function handleQuantityChange(productId, quantity) {
+    const inputElement = document.getElementById(`qtd-input-${productId}`);
+
+    // Envia a solicitação para atualizar a quantidade
+    clearTimeout(inputElement.dataset.timeout);
+    inputElement.dataset.timeout = setTimeout(function () {
+        sendUpdateRequest(productId, quantity);
+    }, 100);
+}
+
+// Função para enviar a solicitação de atualização de quantidade para o servidor
+function sendUpdateRequest(productId, quantity) {
     if (quantity <= 0) {
         deleteItem(productId);
         return false;
@@ -161,6 +173,7 @@ function sendQtd(productId, quantity) {
         productId: productId,
         productQtd: quantity
     };
+
     fetch('./update-quantity', {
         method: 'PUT',
         headers: {
@@ -174,10 +187,13 @@ function sendQtd(productId, quantity) {
             }
             return response.json();
         })
+        .then(data => {
+            console.log('Quantidade atualizada com sucesso:', data.message);
+            loadCart(); // Recarrega o carrinho após a atualização
+        })
         .catch(error => {
             console.error('Erro:', error);
         });
-    loadCart();
 }
 
 //envia soicitação para a remoção do item do carrinho de compras

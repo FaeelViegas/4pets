@@ -1,8 +1,11 @@
 package model.bean;
 
+import java.io.Serializable;
 import javax.json.JsonString;
 
-public class CartDTO {
+public class CartDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L; // Adiciona um serialVersionUID
 
     private int idProduct;
     private String name;

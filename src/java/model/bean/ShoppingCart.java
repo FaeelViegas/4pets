@@ -1,22 +1,17 @@
 package model.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
 
-    private static ShoppingCart instance;
+    private static final long serialVersionUID = 1L; // Adiciona um serialVersionUID
+
     private final List<CartDTO> cartItens;
 
-    private ShoppingCart() {
+    public ShoppingCart() {
         cartItens = new ArrayList<>();
-    }
-
-    public static ShoppingCart getInstance() {
-        if (instance == null) {
-            instance = new ShoppingCart();
-        }
-        return instance;
     }
 
     public List<CartDTO> getCarrinhoItens() {
