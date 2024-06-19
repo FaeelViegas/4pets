@@ -54,8 +54,6 @@ const getAddress = async (cep) => {
     const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data);
-    console.log(formInputs);
     console.log(data.erro);
 
     // erro caso o cep seja invalido

@@ -112,7 +112,6 @@ public class AddressController extends HttpServlet {
             String toPostalCode = request.getParameter("toPostalCode");
             try {
                 String shippingResponse = melhorEnvioAPI.calcularFrete(toPostalCode);
-                System.out.println("Resposta do frete: " + shippingResponse);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");

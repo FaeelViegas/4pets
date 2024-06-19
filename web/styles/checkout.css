@@ -16,7 +16,7 @@
 
     .container {
         display: grid;
-        grid-template-columns: 70% 1fr;
+        grid-template-columns: 65% 1fr;
         grid-template-rows: 1fr;
         gap: 30px;
     }

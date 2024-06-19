@@ -105,7 +105,8 @@
                     </div>
                     <div class="payment-container">
                         <div class="button-container">
-                            <a href="./payment-page" class="btn btn-success">IR PARA O PAGAMENTO</a>
+                            <a onclick="sendOrder()" href="./payment-page" id="payment-button"
+                                class="btn btn-success">IR PARA O PAGAMENTO</a>
                         </div>
                         <div class="back-container">
                             <a href="./home">VOLTAR AS COMPRAS</a>

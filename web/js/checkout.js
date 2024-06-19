@@ -124,15 +124,6 @@ function loadCardShipping(shippingItems) {
     });
 }
 
-//calcula o valor total dos itens do carrinho
-function calculateTotalPrice(cartItens) {
-    let totalPrice = 0;
-    cartItens.forEach(cartItens => {
-        totalPrice += cartItens.priceUnitary * cartItens.quantity;
-    });
-    return totalPrice;
-}
-
 //atualiza o valor total do footer do carrinho
 function updateCartTotal(cartItens) {
     const priceProducts = document.querySelector('#total-value');
@@ -150,6 +141,18 @@ function totalOrder() {
     let totalPedido = valorProdutos + frete;
 
     document.getElementById('total-order').innerText = 'R$ ' + totalPedido.toFixed(2);
+}
+
+function verifyFreteSelect() {
+    let freteStr = document.getElementById('frete').innerText;
+    const button = document.querySelector('#payment-button');
+    if (freteStr === "R$ 0.00") {
+        button.style.pointerEvents = "none";
+        button.style.backgroundColor = "gray"
+    } else {
+        button.style.pointerEvents = "all";
+        button.style.backgroundColor = "rgb(0, 174, 174)"
+    }
 }
 
 // Função para lidar com a mudança na quantidade
@@ -188,7 +191,6 @@ function sendUpdateRequest(productId, quantity) {
             return response.json();
         })
         .then(data => {
-            console.log('Quantidade atualizada com sucesso:', data.message);
             loadCart(); // Recarrega o carrinho após a atualização
         })
         .catch(error => {
@@ -221,7 +223,7 @@ function deleteItem(productId) {
     loadCart();
 }
 
-//carrega os itens no carrinho de compras
+// Carrega os itens no carrinho de compras
 function loadCart() {
     fetch('./cart-itens')
         .then(response => {
@@ -231,8 +233,15 @@ function loadCart() {
             return response.json();
         })
         .then(data => {
-            loadCardProduct(data);
-            updateCartTotal(data);
+            // Verifica se os dados estão vazios
+            if (!data || data.length === 0) {
+                // Redireciona o usuário para a página inicial
+                window.location.href = './home';
+            } else {
+                // Caso contrário, carrega os produtos no carrinho e atualiza o total
+                loadCardProduct(data);
+                updateCartTotal(data);
+            }
         })
         .catch(error => {
             console.error(error);
@@ -259,14 +268,98 @@ function loadAddress() {
 function updateSelectedAddress(address) {
     const selectedAddressDiv = document.getElementById('selectedAddress');
     selectedAddressDiv.innerHTML = `
-        <h4>${address.street}</h4>
-        <span>Numero: ${address.number}, ${address.complement}</span>
-        <span>Bairro: ${address.neighborhood}</span>
-        <span>CEP <span id="cep-selected">${address.cep}</span> - ${address.city},${address.state}</span>
+        <h4 class="${address.idAddress}" id="street-selected">${address.street}</h4>
+        <span>Numero:<span id="number-selected">${address.number}</span> ,<span id="complement-selected">${address.complement}</span></span>
+        <span>Bairro: <span id="neighborhood-selected">${address.neighborhood}</span></span>
+        <span>CEP <span id="cep-selected">${address.cep}</span> - <span id="city-selected">${address.city}</span>,<span id="state-selected">${address.state}</span></span>
     `;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function setupFieldPlaceholders() {
+    // Seleciona todos os elementos com a classe 'field-placeholder'
+    const placeholders = document.querySelectorAll('.field-wrapper .field-placeholder');
+
+    // Adiciona um event listener para cada elemento 'field-placeholder'
+    placeholders.forEach(placeholder => {
+        placeholder.addEventListener('click', () => {
+            // Encontra o input mais próximo dentro do wrapper e foca nele
+            const input = placeholder.closest('.field-wrapper').querySelector('input');
+            if (input) {
+                input.focus();
+            }
+        });
+    });
+
+    // Seleciona todos os inputs dentro de elementos com a classe 'field-wrapper'
+    const inputs = document.querySelectorAll('.field-wrapper input');
+
+    // Adiciona um event listener para cada input
+    inputs.forEach(input => {
+        input.addEventListener('keyup', () => {
+            const value = input.value.trim();
+            if (value) {
+                input.closest('.field-wrapper').classList.add('hasValue');
+            } else {
+                input.closest('.field-wrapper').classList.remove('hasValue');
+            }
+        });
+    });
+}
+
+function sendOrder() {
+    //pegando os dados necessarios para a criação do pedido
+    let valorProdutosStr = document.getElementById('total-value').innerText;
+    let freteStr = document.getElementById('frete').innerText;
+    let cep = document.getElementById('cep-selected').innerText;
+    let street = document.getElementById('street-selected').innerText;
+    let number = document.getElementById('number-selected').innerText;
+    let city = document.getElementById('city-selected').innerText;
+    let neighborhood = document.getElementById('neighborhood-selected').innerText;
+    let state = document.getElementById('state-selected').innerText;
+    let complement = document.getElementById('complement-selected').innerText;
+
+    let elemento = document.getElementById('street-selected');
+    let idAddress = elemento.className;
+    let valorProdutos = parseFloat(valorProdutosStr.replace('R$ ', ''));
+    let frete = parseFloat(freteStr.replace('R$ ', ''));
+    let total = valorProdutos + frete;
+
+    const orderData = {
+        street: street,
+        number: number,
+        cep: cep,
+        city: city,
+        neighborhood: neighborhood,
+        state: state,
+        complement: complement,
+        productValue: valorProdutos,
+        shippingValue: frete,
+        totalValue: total,
+        idAddress: idAddress
+    };
+
+    fetch('./add-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao enviar o pedido');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    setupFieldPlaceholders();
+    verifyFreteSelect();
+    loadCart();
     const confirmAddressBtn = document.getElementById('confirmAddressBtn');
 
     // Carrega endereços quando o modal é aberto
@@ -281,6 +374,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedAddress = addresses.find(addr => addr.idAddress == selectedId);
             if (selectedAddress) {
                 updateSelectedAddress(selectedAddress);
+                const priceShipping = document.querySelector('#frete');
+                priceShipping.textContent = "R$ 0.00";
+                verifyFreteSelect();
                 $('#address-modal-selection').modal('hide');
             } else {
                 console.error('Endereço selecionado não encontrado');
@@ -289,50 +385,44 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Nenhum endereço selecionado');
         }
     });
-});
 
-$(function () {
-
-    $(".field-wrapper .field-placeholder").on("click", function () {
-        $(this).closest(".field-wrapper").find("input").focus();
+    document.getElementById("confirmAddressBtn").addEventListener("click", function () {
+        setTimeout(() => {
+            const spanElement = document.querySelector('#cep-selected');
+            const spanValue = spanElement.innerText;
+            fetch('./calculate-shipping', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'toPostalCode': spanValue
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao obter dados de frete');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    loadCardShipping(data);
+                    // Selecionando todos os elementos de input radio com a classe 'shippingSelected'
+                    const shippingInputs = document.querySelectorAll('input[type="radio"].shippingSelected');
+                    // Adicionando um event listener para cada input radio
+                    shippingInputs.forEach(input => {
+                        input.addEventListener('change', function () {
+                            // Verifica se o input radio está marcado
+                            if (this.checked) {
+                                //função que bloquei e permite acessoa a proxima pagina do checkout
+                                verifyFreteSelect();
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }, "50");
     });
-    $(".field-wrapper input").on("keyup", function () {
-        var value = $.trim($(this).val());
-        if (value) {
-            $(this).closest(".field-wrapper").addClass("hasValue");
-        } else {
-            $(this).closest(".field-wrapper").removeClass("hasValue");
-        }
-    });
 });
-
-document.getElementById("confirmAddressBtn").addEventListener("click", function () {
-    setTimeout(() => {
-        const spanElement = document.querySelector('#cep-selected');
-        const spanValue = spanElement.innerText;
-        fetch('./calculate-shipping', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                'toPostalCode': spanValue
-            })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao obter dados de frete');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                loadCardShipping(data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, "50");
-});
-
-loadCart();
