@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.bean.CartDTO;
 import model.bean.ShoppingCart;
 
@@ -40,9 +41,14 @@ public class CartController extends HttpServlet {
         processRequest(request, response);
         String path = request.getServletPath();
         if (path.equals("/cart-itens")) {
-            List<CartDTO> cartItens = ShoppingCart.getInstance().getCarrinhoItens();
+            // Obtém a sessão do usuário e o carrinho de compras
+            HttpSession session = request.getSession();
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
+
+            List<CartDTO> cartItens = cart.getCarrinhoItens();
             Gson gson = new Gson();
             String json = gson.toJson(cartItens);
+
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
@@ -73,7 +79,18 @@ public class CartController extends HttpServlet {
                 String stock = jsonObject.getString("stock");
                 JsonString productImage = jsonObject.getJsonString("productImage");
                 CartDTO objCart = new CartDTO();
-                List<CartDTO> cartItens = ShoppingCart.getInstance().getCarrinhoItens();
+
+                // Obtém a sessão do usuário e o carrinho de compras
+                HttpSession session = request.getSession();
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
+
+                // Se o carrinho não existir na sessão, cria um novo e armazena na sessão
+                if (cart == null) {
+                    cart = new ShoppingCart();
+                    session.setAttribute("shoppingCart", cart);
+                }
+
+                List<CartDTO> cartItens = cart.getCarrinhoItens();
 
                 boolean found = false;
                 for (CartDTO item : cartItens) {
@@ -91,7 +108,7 @@ public class CartController extends HttpServlet {
                     objCart.setQuantity(productQtd);
                     objCart.setStock(Integer.parseInt(stock));
                     objCart.setImage(productImage);
-                    ShoppingCart.getInstance().addItem(objCart);
+                    cart.addItem(objCart);
                 }
 
                 javax.json.JsonObject responseJson = Json.createObjectBuilder()
@@ -113,7 +130,11 @@ public class CartController extends HttpServlet {
         String path = request.getServletPath();
         if (path.equals("/delete-item-cart")) {
             String productId = request.getParameter("productId");
-            List<CartDTO> cartItems = ShoppingCart.getInstance().getCarrinhoItens();
+            // obtem a sessão do usuário e o carrinho de compras
+            HttpSession session = request.getSession();
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
+
+            List<CartDTO> cartItems = cart.getCarrinhoItens();
 
             CartDTO itemToRemove = null;
             for (CartDTO item : cartItems) {
@@ -125,7 +146,10 @@ public class CartController extends HttpServlet {
             if (itemToRemove != null) {
                 cartItems.remove(itemToRemove);
             }
+
             response.setStatus(HttpServletResponse.SC_OK);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
         }
     }
 
@@ -146,8 +170,11 @@ public class CartController extends HttpServlet {
                 int productId = jsonObject.getInt("productId");
                 int productQtd = Integer.parseInt(jsonObject.getString("productQtd"));
 
-                CartDTO objCart = new CartDTO();
-                List<CartDTO> cartItens = ShoppingCart.getInstance().getCarrinhoItens();
+                // Obtém a sessão do usuário e o carrinho de compras
+                HttpSession session = request.getSession();
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
+
+                List<CartDTO> cartItens = cart.getCarrinhoItens();
                 for (CartDTO item : cartItens) {
                     if (item.getIdProduct() == productId) {
                         item.setQuantity(productQtd);
