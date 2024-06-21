@@ -117,7 +117,7 @@
     }
 
     .buttons-address {
-        display: flex;
+        display: none;
         flex-direction: row-reverse;
         padding: 1px;
     }

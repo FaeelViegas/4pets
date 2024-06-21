@@ -117,6 +117,7 @@ function addressOrder(order) {
         document.getElementById('state-selected').textContent = order.state;
     });
 }
+
 function dataUser(userData) {
     document.getElementById('name').textContent = userData.name;
     document.getElementById('cpf').textContent = userData.cpf;
