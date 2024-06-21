@@ -54,7 +54,6 @@ const getAddress = async (cep) => {
     const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data.erro);
 
     // erro caso o cep seja invalido
     if (data.erro) {
@@ -63,7 +62,6 @@ const getAddress = async (cep) => {
         }
 
         addressForm.reset();
-        errorToast(text = "CEP Inválido, tente novamente.");
         return;
     }
 

@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rafae/Desktop/4pets/src/java/model/bean/OrderManager.java</file>
+            <file>file:/C:/Users/rafae/Desktop/4pets/src/java/controller/UserController.java</file>
             <file>file:/C:/Users/rafae/Desktop/4pets/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/rafae/Desktop/4pets/src/java/model/bean/OrderManager.java</file>
+            <file>file:/C:/Users/rafae/Desktop/4pets/src/java/controller/AddressController.java</file>
             <file>file:/C:/Users/rafae/Desktop/4pets/src/java/model/bean/OrderDTO.java</file>
         </group>
     </open-files>

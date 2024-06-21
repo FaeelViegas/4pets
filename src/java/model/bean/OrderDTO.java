@@ -19,12 +19,15 @@ public class OrderDTO implements Serializable {
     private double shippingValue;
     private double totalValue;
     private int userId;
-    private JsonString addressId;
+    private int addressId;
+    private int idOrder;
+    private String statusPayment;
+    private String dateTime;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(String street, String number, String cep, String city, String neighborhood, String state, String complement, String methodPayment, double productValue, double shippingValue, double totalValue, int userId, JsonString addressId) {
+    public OrderDTO(String street, String number, String cep, String city, String neighborhood, String state, String complement, String methodPayment, double productValue, double shippingValue, double totalValue, int userId, int addressId, int idOrder, String statusPayment, String dateTime) {
         this.street = street;
         this.number = number;
         this.cep = cep;
@@ -38,6 +41,9 @@ public class OrderDTO implements Serializable {
         this.totalValue = totalValue;
         this.userId = userId;
         this.addressId = addressId;
+        this.idOrder = idOrder;
+        this.statusPayment = statusPayment;
+        this.dateTime = dateTime;
     }
 
     public String getStreet() {
@@ -136,12 +142,36 @@ public class OrderDTO implements Serializable {
         this.userId = userId;
     }
 
-    public JsonString getAddressId() {
+    public int getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(JsonString addressId) {
+    public void setAddressId(int addressId) {
         this.addressId = addressId;
+    }
+
+    public int getIdOrder() {
+        return idOrder;
+    }
+
+    public void setIdOrder(int idOrder) {
+        this.idOrder = idOrder;
+    }
+
+    public String getStatusPayment() {
+        return statusPayment;
+    }
+
+    public void setStatusPayment(String statusPayment) {
+        this.statusPayment = statusPayment;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
 }

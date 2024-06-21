@@ -45,10 +45,34 @@
             </div>
             <div class="container">
                 <div class="container-left">
-                    <div class="payment-container">
+                    <div class="data-container">
                         <div class="header-container">
                             <i class="fa-solid fa-user"></i>
                             <span>DADOS PESSOAIS</span>
+                        </div>
+                        <div class="d-flex flex-column p-3">
+                            <span class="fw-bold p-2">
+                                Nome:
+                                <span id="name" class="fw-normal"></span>
+                            </span>
+                            <span class="fw-bold p-2">
+                                CPF:
+                                <span id="cpf" class="fw-normal"></span>
+                            </span>
+                            <span class="fw-bold p-2">
+                                Telefone:
+                                <span id="phone" class="fw-normal"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cart-container">
+                        <div class="header-container">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                            <span>PRODUTO</span>
+                        </div>
+                        <div class="itens-cart-ul">
+                            <ul class="list-group-item">
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -77,9 +101,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="delivery-container">
+                        <div class="header-container">
+                            <i class="fa-solid fa-truck-fast"></i>
+                            <span>ENTREGA</span>
+                        </div>
+                        <div class="delivery">
+                            <div class="address d-flex flex-column p-2">
+                                <div class="address-selected">
+                                    <h4 id="street-selected">Rua</h4>
+                                    <span>Numero:<span id="number-selected">00</span> ,<span
+                                            id="complement-selected">complemento</span></span>
+                                    <span>Bairro: <span id="neighborhood-selected">Bairro</span></span>
+                                    <span>CEP <span id="cep-selected">00000000</span> - <span
+                                            id="city-selected">cidade</span>,<span
+                                            id="state-selected">estado</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="confirm-container">
                         <div class="button-container">
-                            <a href="#" class="btn btn-success">FINALIZAR</a>
+                            <a href="./close-order" class="btn btn-success">FINALIZAR</a>
                         </div>
                         <div class="back-container">
                             <a href="./payment-page">VOLTAR</a>
@@ -100,5 +143,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="./js/checkout-confirmation.js"></script>
 
     </html>

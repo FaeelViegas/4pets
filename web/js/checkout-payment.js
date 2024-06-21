@@ -50,7 +50,6 @@ function validateCvvNumber(input) {
 }
 
 function validateForm() {
-    console.log("digitou")
     if (methodPayment === "pix") {
         formValidated = true; // Se for pix, marca o formulário como validado
         return true;
@@ -121,7 +120,6 @@ function getOrder() {
         })
         .then(data => {
             totalOrder(data);
-            console.log(data);
         })
         .catch(error => {
             console.error(error);

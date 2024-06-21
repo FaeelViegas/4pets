@@ -19,11 +19,14 @@ import model.bean.OrderDTO;
 import model.bean.OrderManager;
 import model.bean.ShoppingCart;
 import model.bean.UserDTO;
+import model.dao.OrderDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order"})
+@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order", "/close-order"})
 public class CartController extends HttpServlet {
 
+    OrderDTO objOrder = new OrderDTO();
+    OrderDAO objOrderDao = new OrderDAO();
     UserDAO objUserDao = new UserDAO();
     UserDTO objUser = new UserDTO();
 
@@ -45,6 +48,40 @@ public class CartController extends HttpServlet {
             }
             case "/confirmation-page": {
                 String path = "/WEB-INF/jsp/checkout-confirmation.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/close-order": {
+                HttpSession session = request.getSession();
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
+                OrderManager orderManager = (OrderManager) session.getAttribute("orderManager");
+                if (cart != null && orderManager != null) {
+                    List<CartDTO> cartItems = cart.getCarrinhoItens();
+                    List<OrderDTO> orders = orderManager.getOrders();
+
+                    if (orders != null && !orders.isEmpty()) {
+                        OrderDTO order = orders.get(0); // Obtém o pedido da lista
+
+                        int addressId = order.getAddressId();
+                        int userId = order.getUserId();
+                        String methodPayment = order.getMethodPayment();
+                        double totalValue = order.getTotalValue();
+
+                        objOrder.setAddressId(addressId);
+                        objOrder.setUserId(userId);
+                        objOrder.setMethodPayment(methodPayment);
+                        objOrder.setTotalValue(totalValue);
+
+                        // Insere o pedido e os itens do carrinho no banco de dados
+                        objOrderDao.insertOrder(objOrder, cartItems);
+                    } else {
+                        System.out.println("Nenhum pedido encontrado na lista.");
+                    }
+                } else {
+                    System.out.println("Carrinho ou OrderManager não encontrado na sessão.");
+                }
+                String path = "/WEB-INF/jsp/checkout-conclusion.jsp";
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
                 dispatcher.forward(request, response);
                 break;
@@ -189,16 +226,20 @@ public class CartController extends HttpServlet {
                 // Pega os dados do JSON para criar um novo pedido
                 javax.json.JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
                 String street = jsonObject.getString("street");
+                street = new String(street.getBytes("ISO-8859-1"), "UTF-8");
                 String number = jsonObject.getString("number");
                 String cep = jsonObject.getString("cep");
                 String city = jsonObject.getString("city");
+                city = new String(city.getBytes("ISO-8859-1"), "UTF-8");
                 String neighborhood = jsonObject.getString("neighborhood");
+                neighborhood = new String(neighborhood.getBytes("ISO-8859-1"), "UTF-8");
                 String state = jsonObject.getString("state");
                 String complement = jsonObject.getString("complement");
+                complement = new String(complement.getBytes("ISO-8859-1"), "UTF-8");
                 double productValue = jsonObject.getJsonNumber("productValue").doubleValue();
                 double shippingValue = jsonObject.getJsonNumber("shippingValue").doubleValue();
                 double totalValue = jsonObject.getJsonNumber("totalValue").doubleValue();
-                JsonString idAddress = jsonObject.getJsonString("idAddress");
+                double idAddress = jsonObject.getJsonNumber("idAddress").doubleValue();
 
                 // Cria um novo objeto OrderDTO
                 OrderDTO order = new OrderDTO();
@@ -217,7 +258,7 @@ public class CartController extends HttpServlet {
                 }
 
                 // Define os campos do pedido
-                order.setAddressId(idAddress);
+                order.setAddressId((int) idAddress);
                 order.setCep(cep);
                 order.setCity(city);
                 order.setComplement(complement);

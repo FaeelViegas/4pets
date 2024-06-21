@@ -72,7 +72,7 @@ function handleQuantityChange(productId, quantity) {
     }, 100);
 }
 
-// Função para enviar a solicitação de atualização de quantidade para o servidor
+// Função para enviar a solicitação de atualização de quantidade para o controlador
 function sendUpdateRequest(productId, quantity) {
     if (quantity <= 0) {
         deleteItem(productId);

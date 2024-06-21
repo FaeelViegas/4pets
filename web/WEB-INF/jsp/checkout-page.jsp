@@ -89,7 +89,7 @@
                                 <div id="selectedAddress" class="address-selected d-flex flex-column">
                                     <h4 class="text-center m-0">SELECIONE UM ENDEREÇO!</h4>
                                 </div>
-                                <div class="d-flex gap-3 mt-2">
+                                <div class="d-flex gap-3 mt-2 justify-content-center">
                                     <button id="selectAddressBtn" data-toggle="modal"
                                         data-target="#address-modal-selection"
                                         class="btn btn-outline-primary">Selecionar</button>
