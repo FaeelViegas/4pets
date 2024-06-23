@@ -8,21 +8,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import model.bean.CartDTO;
 import model.bean.OrderDTO;
-import model.bean.ShoppingCart;
+import model.bean.ProductDTO;
 
 public class OrderDAO {
 
-    public List<OrderDTO> read() {
-        List<OrderDTO> pedidos = new ArrayList<>();
-        String sql = "SELECT * FROM orders";
+    public List<OrderDTO> read(int id) {
+        List<OrderDTO> orders = new ArrayList<>();
+        String sql = "SELECT * FROM orders WHERE user_id = ?";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 OrderDTO objOrder = new OrderDTO();
@@ -33,7 +33,7 @@ public class OrderDAO {
                 objOrder.setTotalValue(rs.getFloat("total_value"));
                 objOrder.setDateTime(rs.getString("date_time"));
                 objOrder.setAddressId(rs.getInt("adress_id"));
-                pedidos.add(objOrder);
+                orders.add(objOrder);
             }
             rs.close();
             stmt.close();
@@ -41,7 +41,35 @@ public class OrderDAO {
         } catch (SQLException e) {
             System.out.println("Erro leirura de pedidos: " + e);
         }
-        return pedidos;
+        return orders;
+    }
+
+    public List<ProductDTO> readOrderProduct() {
+        List<ProductDTO> products = new ArrayList<>();
+        String sql = "SELECT iop.quantity, iop.unitary_value, iop.order_id, iop.product_id, p.name AS product_name, img.image AS product_image FROM order_product iop JOIN products p ON iop.product_id = p.id_product LEFT JOIN images img ON p.id_product = img.product_id;";
+        try {
+            Connection connection = ConnectionDB.connect();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            stmt = connection.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                ProductDTO objProduct = new ProductDTO();
+                objProduct.setQuantity(rs.getInt("quantity"));
+                objProduct.setPrice(rs.getDouble("unitary_value"));
+                objProduct.setOrderId(rs.getInt("order_id"));
+                objProduct.setIdProduct(rs.getInt("product_id"));
+                objProduct.setName(rs.getString("product_name"));
+                objProduct.setImage(rs.getBytes("product_image"));
+                products.add(objProduct);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Erro leirura de produtos: " + e);
+        }
+        return products;
     }
 
     public void insertOrder(OrderDTO objOrder, List<CartDTO> cartItens) {

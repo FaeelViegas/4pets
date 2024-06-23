@@ -1,8 +1,4 @@
 @media(min-width: 991px) {
-    .list-itens-order {
-        max-height: 400px;
-        overflow: auto;
-    }
 
     .order-ul {
         max-height: 600px;

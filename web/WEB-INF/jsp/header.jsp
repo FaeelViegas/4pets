@@ -20,7 +20,7 @@
                 <header>
                     <div class="top-header">
                         <nav class="container-nav-top">
-                            <a href="./dashboard">Central do Vendedor |</a>
+                            <a href="./login-seller-page">Central do Vendedor |</a>
                             <a href="./register-seller">Venda na 4Pets</a>
                         </nav>
                     </div>

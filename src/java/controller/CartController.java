@@ -17,18 +17,20 @@ import javax.servlet.http.HttpSession;
 import model.bean.CartDTO;
 import model.bean.OrderDTO;
 import model.bean.OrderManager;
+import model.bean.ProductDTO;
 import model.bean.ShoppingCart;
 import model.bean.UserDTO;
 import model.dao.OrderDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order", "/close-order"})
+@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order", "/close-order", "/get-orders-user", "/get-products-orders"})
 public class CartController extends HttpServlet {
 
     OrderDTO objOrder = new OrderDTO();
     OrderDAO objOrderDao = new OrderDAO();
     UserDAO objUserDao = new UserDAO();
     UserDTO objUser = new UserDTO();
+    Gson gson = new Gson();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -109,7 +111,6 @@ public class CartController extends HttpServlet {
             }
 
             List<CartDTO> cartItems = cart.getCarrinhoItens();
-            Gson gson = new Gson();
             String json = gson.toJson(cartItems);
 
             response.setContentType("application/json");
@@ -129,19 +130,33 @@ public class CartController extends HttpServlet {
                 }
                 // Obtém a lista de pedidos
                 List<OrderDTO> orders = orderManager.getOrders();
-
-                // Converte a lista de pedidos para JSON
-                Gson gson = new Gson();
                 String json = gson.toJson(orders);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(json);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
+        } else if (path.equals("/get-orders-user")) {
+            HttpSession session = request.getSession(false);
+            String user = (String) session.getAttribute("user");
+            objUser.setUserName(user);
+            int id = objUserDao.returnUserId(objUser);
+            List<OrderDTO> orders = objOrderDao.read(id);
+            String json = gson.toJson(orders);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        } else if (path.equals("/get-products-orders")) {
+            List<ProductDTO> products = objOrderDao.readOrderProduct();
+            String json = gson.toJson(products);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
     }
 
@@ -207,8 +222,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException | NumberFormatException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
@@ -285,8 +299,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
@@ -343,8 +356,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
@@ -414,8 +426,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException | NumberFormatException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }

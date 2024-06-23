@@ -324,7 +324,7 @@ function sendOrder() {
     let valorProdutos = parseFloat(valorProdutosStr.replace('R$ ', ''));
     let frete = parseFloat(freteStr.replace('R$ ', ''));
     let total = valorProdutos + frete;
-    
+
     const orderData = {
         street: street,
         number: number,
