@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.bean.SellerDTO;
 import model.dao.SellerDAO;
 
@@ -24,6 +25,9 @@ public class SellerController extends HttpServlet {
         String url = request.getServletPath();
         switch (url) {
             case "/dashboard": {
+                String seller = request.getParameter("email");
+                HttpSession session = request.getSession();
+                session.setAttribute("seller", seller);
                 String path = "/WEB-INF/jsp/dashboard-seller.jsp";
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
                 dispatcher.forward(request, response);
@@ -96,7 +100,7 @@ public class SellerController extends HttpServlet {
 
                 objSellerDao.insertSeller(objSeller);
                 response.sendRedirect("./login-seller-page");
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("Erro ao inserir vendedor: " + e);
             }
         }

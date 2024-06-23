@@ -30,7 +30,7 @@
                     <div class="container-image">
                         <img src="./assets/login-seller.png" alt="">
                     </div>
-                    <form action="login-seller" name="frmLogin" method="post">
+                    <form action="dashboard" name="frmLogin" method="post">
                         <div class="container">
                             <h1>LOGIN DE VENDEDOR</h1>
                             <div class="input-group mb-3 z-index-0">

@@ -58,6 +58,7 @@ public class CartController extends HttpServlet {
                 HttpSession session = request.getSession();
                 ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
                 OrderManager orderManager = (OrderManager) session.getAttribute("orderManager");
+
                 if (cart != null && orderManager != null) {
                     List<CartDTO> cartItems = cart.getCarrinhoItens();
                     List<OrderDTO> orders = orderManager.getOrders();
@@ -76,13 +77,17 @@ public class CartController extends HttpServlet {
                         objOrder.setTotalValue(totalValue);
 
                         // Insere o pedido e os itens do carrinho no banco de dados
-                        objOrderDao.insertOrder(objOrder, cartItems);
+                        int orderId = objOrderDao.insertOrder(objOrder, cartItems);
+
+                        // Adiciona o ID do pedido à requisição
+                        request.setAttribute("orderId", orderId);
                     } else {
                         System.out.println("Nenhum pedido encontrado na lista.");
                     }
                 } else {
                     System.out.println("Carrinho ou OrderManager não encontrado na sessão.");
                 }
+
                 String path = "/WEB-INF/jsp/checkout-conclusion.jsp";
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
                 dispatcher.forward(request, response);

@@ -18,7 +18,6 @@ function validate() {
             frmLogin.password.focus();
             return false;
         } else {
-            sendUserId(matchedUser.idUser);
             document.forms["frmLogin"].submit();
         }
     }

@@ -12,12 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.bean.CategoryDTO;
 import model.bean.ImageDTO;
 import model.bean.ProductDTO;
 import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
+import model.dao.SellerDAO;
 
 @MultipartConfig
 @WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product", "/product", "/product-item"})
@@ -28,6 +30,7 @@ public class ProductController extends HttpServlet {
     CategoryDAO objCategoryDao = new CategoryDAO();
     ProductDAO objProductDao = new ProductDAO();
     ImageDTO objImage = new ImageDTO();
+    SellerDAO objSellerDao = new SellerDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -114,7 +117,10 @@ public class ProductController extends HttpServlet {
             objProduct.setDescription(description);
             objProduct.setPrice(Double.parseDouble(request.getParameter("price")));
             objProduct.setCategoryId(Integer.parseInt(request.getParameter("category")));
-            objProduct.setSellerId(Integer.parseInt(request.getParameter("seller")));
+            HttpSession session = request.getSession(false);
+            String seller = (String) session.getAttribute("seller");
+            int id = objSellerDao.returnSellerId(seller);
+            objProduct.setSellerId(id);
             objProduct.setImage(imageBytes);
             objProduct.setQuantity(Integer.parseInt(request.getParameter("quantity")));
             objProductDao.insertProduct(objProduct);

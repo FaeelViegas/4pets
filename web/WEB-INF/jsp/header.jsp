@@ -70,7 +70,6 @@
                     <div class="category-header">
                         <nav>
                             <ul class="category d-flex">
-                                <li><a href="#">Ver todas as categorias</a></li>
                             </ul>
                         </nav>
                     </div>

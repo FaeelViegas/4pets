@@ -43,11 +43,11 @@ function loadOrders(orders, items) {
                     </div>
                     <div class="container-value-cart">
                         <div>
-                            <span>Quantity:</span>
+                            <span>Quantidade:</span>
                             <span>${item.quantity}</span>
                         </div>
                         <div>
-                            <span>Value:</span>
+                            <span>Valor:</span>
                             <span>$${item.price.toFixed(2)}</span>
                         </div>
                     </div>

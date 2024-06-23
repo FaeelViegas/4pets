@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.SellerDTO;
+import model.bean.UserDTO;
 
 public class SellerDAO {
 
@@ -63,4 +64,20 @@ public class SellerDAO {
         }
     }
 
+    public int returnSellerId(String email) {
+        try (Connection connection = ConnectionDB.connect();
+                PreparedStatement stmt = connection.prepareStatement("SELECT id_seller FROM sellers WHERE store_email = ?")) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_seller");
+                } else {
+                    return -1;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro encontrando id de vendedor: " + e.getMessage());
+            return -1;
+        }
+    }
 }

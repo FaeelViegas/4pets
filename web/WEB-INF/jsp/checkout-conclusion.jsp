@@ -60,7 +60,9 @@
                         </div>
                         <div class="order-number">
                             <p>O número do seu pedido é:</p>
-                            <h2 id="id-order">000000</h2>
+                            <h2 id="id-order">
+                                <%= request.getAttribute("orderId") %>
+                            </h2>
                         </div>
                     </div>
                 </div>
@@ -80,7 +82,9 @@
                     <div class="order-info">
                         <div class="order-number">
                             <p>O número do seu pedido é:</p>
-                            <h2 id="id-order">000000</h2>
+                            <h2 id="id-order">
+                                <%= request.getAttribute("orderId") %>
+                            </h2>
                         </div>
                     </div>
                 </div>
@@ -101,5 +105,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="./js/checkout-conclusion.js"></script>
 
     </html>

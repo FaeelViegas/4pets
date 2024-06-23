@@ -72,8 +72,10 @@ public class OrderDAO {
         return products;
     }
 
-    public void insertOrder(OrderDTO objOrder, List<CartDTO> cartItens) {
+    public int insertOrder(OrderDTO objOrder, List<CartDTO> cartItens) {
         String sql = "INSERT INTO orders (user_id, adress_id, method_payment, total_value, date_time) VALUES (?, ?, ?, ?, NOW())";
+        int idPedido = -1;
+
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -84,12 +86,13 @@ public class OrderDAO {
 
             stmt.executeUpdate();
             ResultSet generatedKeys = stmt.getGeneratedKeys();
-            int idPedido = -1;
+
             if (generatedKeys.next()) {
                 idPedido = generatedKeys.getInt(1);
             } else {
                 throw new SQLException("Falha ao recuperar o ID do pedido gerado automaticamente.");
             }
+
             insertItensOrder(cartItens, idPedido);
 
             stmt.close();
@@ -97,6 +100,8 @@ public class OrderDAO {
         } catch (SQLException e) {
             System.out.println("Insere Pedido: " + e);
         }
+
+        return idPedido;
     }
 
     private void insertItensOrder(List<CartDTO> cartItens, int idOrder) {
