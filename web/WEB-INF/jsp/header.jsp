@@ -20,7 +20,7 @@
                 <header>
                     <div class="top-header">
                         <nav class="container-nav-top">
-                            <a href="./dashboard">Central do Vendedor |</a>
+                            <a href="./login-seller-page">Central do Vendedor |</a>
                             <a href="./register-seller">Venda na 4Pets</a>
                         </nav>
                     </div>
@@ -68,9 +68,9 @@
                         </div>
                     </div>
                     <div class="category-header">
+                        <button class="toggle-menu">Categorias</button>
                         <nav>
-                            <ul class="category d-flex">
-                                <li><a href="#">Ver todas as categorias</a></li>
+                            <ul class="category">
                             </ul>
                         </nav>
                     </div>

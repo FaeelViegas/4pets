@@ -319,7 +319,8 @@ function sendOrder() {
     let complement = document.getElementById('complement-selected').innerText;
 
     let elemento = document.getElementById('street-selected');
-    let idAddress = elemento.className;
+    let idAddressStr = elemento.className;
+    let idAddress = parseInt(idAddressStr, 10);
     let valorProdutos = parseFloat(valorProdutosStr.replace('R$ ', ''));
     let frete = parseFloat(freteStr.replace('R$ ', ''));
     let total = valorProdutos + frete;

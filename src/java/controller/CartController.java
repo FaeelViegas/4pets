@@ -17,15 +17,20 @@ import javax.servlet.http.HttpSession;
 import model.bean.CartDTO;
 import model.bean.OrderDTO;
 import model.bean.OrderManager;
+import model.bean.ProductDTO;
 import model.bean.ShoppingCart;
 import model.bean.UserDTO;
+import model.dao.OrderDAO;
 import model.dao.UserDAO;
 
-@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order"})
+@WebServlet(name = "CartController", urlPatterns = {"/add-product-cart", "/cart-itens", "/update-quantity", "/delete-item-cart", "/finalize-order", "/payment-page", "/add-order", "/get-orders", "/confirmation-page", "/update-order", "/close-order", "/get-orders-user", "/get-products-orders"})
 public class CartController extends HttpServlet {
 
+    OrderDTO objOrder = new OrderDTO();
+    OrderDAO objOrderDao = new OrderDAO();
     UserDAO objUserDao = new UserDAO();
     UserDTO objUser = new UserDTO();
+    Gson gson = new Gson();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,6 +50,45 @@ public class CartController extends HttpServlet {
             }
             case "/confirmation-page": {
                 String path = "/WEB-INF/jsp/checkout-confirmation.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/close-order": {
+                HttpSession session = request.getSession();
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingCart");
+                OrderManager orderManager = (OrderManager) session.getAttribute("orderManager");
+
+                if (cart != null && orderManager != null) {
+                    List<CartDTO> cartItems = cart.getCarrinhoItens();
+                    List<OrderDTO> orders = orderManager.getOrders();
+
+                    if (orders != null && !orders.isEmpty()) {
+                        OrderDTO order = orders.get(0); // Obtém o pedido da lista
+
+                        int addressId = order.getAddressId();
+                        int userId = order.getUserId();
+                        String methodPayment = order.getMethodPayment();
+                        double totalValue = order.getTotalValue();
+
+                        objOrder.setAddressId(addressId);
+                        objOrder.setUserId(userId);
+                        objOrder.setMethodPayment(methodPayment);
+                        objOrder.setTotalValue(totalValue);
+
+                        // Insere o pedido e os itens do carrinho no banco de dados
+                        int orderId = objOrderDao.insertOrder(objOrder, cartItems);
+
+                        // Adiciona o ID do pedido à requisição
+                        request.setAttribute("orderId", orderId);
+                    } else {
+                        System.out.println("Nenhum pedido encontrado na lista.");
+                    }
+                } else {
+                    System.out.println("Carrinho ou OrderManager não encontrado na sessão.");
+                }
+
+                String path = "/WEB-INF/jsp/checkout-conclusion.jsp";
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
                 dispatcher.forward(request, response);
                 break;
@@ -72,7 +116,6 @@ public class CartController extends HttpServlet {
             }
 
             List<CartDTO> cartItems = cart.getCarrinhoItens();
-            Gson gson = new Gson();
             String json = gson.toJson(cartItems);
 
             response.setContentType("application/json");
@@ -92,19 +135,33 @@ public class CartController extends HttpServlet {
                 }
                 // Obtém a lista de pedidos
                 List<OrderDTO> orders = orderManager.getOrders();
-
-                // Converte a lista de pedidos para JSON
-                Gson gson = new Gson();
                 String json = gson.toJson(orders);
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(json);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
+        } else if (path.equals("/get-orders-user")) {
+            HttpSession session = request.getSession(false);
+            String user = (String) session.getAttribute("user");
+            objUser.setUserName(user);
+            int id = objUserDao.returnUserId(objUser);
+            List<OrderDTO> orders = objOrderDao.read(id);
+            String json = gson.toJson(orders);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        } else if (path.equals("/get-products-orders")) {
+            List<ProductDTO> products = objOrderDao.readOrderProduct();
+            String json = gson.toJson(products);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
     }
 
@@ -170,8 +227,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException | NumberFormatException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
@@ -189,16 +245,20 @@ public class CartController extends HttpServlet {
                 // Pega os dados do JSON para criar um novo pedido
                 javax.json.JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
                 String street = jsonObject.getString("street");
+                street = new String(street.getBytes("ISO-8859-1"), "UTF-8");
                 String number = jsonObject.getString("number");
                 String cep = jsonObject.getString("cep");
                 String city = jsonObject.getString("city");
+                city = new String(city.getBytes("ISO-8859-1"), "UTF-8");
                 String neighborhood = jsonObject.getString("neighborhood");
+                neighborhood = new String(neighborhood.getBytes("ISO-8859-1"), "UTF-8");
                 String state = jsonObject.getString("state");
                 String complement = jsonObject.getString("complement");
+                complement = new String(complement.getBytes("ISO-8859-1"), "UTF-8");
                 double productValue = jsonObject.getJsonNumber("productValue").doubleValue();
                 double shippingValue = jsonObject.getJsonNumber("shippingValue").doubleValue();
                 double totalValue = jsonObject.getJsonNumber("totalValue").doubleValue();
-                JsonString idAddress = jsonObject.getJsonString("idAddress");
+                double idAddress = jsonObject.getJsonNumber("idAddress").doubleValue();
 
                 // Cria um novo objeto OrderDTO
                 OrderDTO order = new OrderDTO();
@@ -217,7 +277,7 @@ public class CartController extends HttpServlet {
                 }
 
                 // Define os campos do pedido
-                order.setAddressId(idAddress);
+                order.setAddressId((int) idAddress);
                 order.setCep(cep);
                 order.setCity(city);
                 order.setComplement(complement);
@@ -244,8 +304,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
@@ -302,8 +361,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }
@@ -373,8 +431,7 @@ public class CartController extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(responseJson.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException | NumberFormatException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().write("Erro interno ao processar a solicitação.");
             }

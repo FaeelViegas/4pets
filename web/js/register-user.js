@@ -1,3 +1,20 @@
+
+
+let users;
+fetch('./users-data')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao obter dados dos usuários');
+        }
+        return response.json();
+    })
+    .then(data => {
+        users = data;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
 function validate() {
     let name = frmRegister.name.value;
     let cpf = frmRegister.cpf.value;
@@ -61,22 +78,6 @@ function validate() {
     }
     document.forms["frmRegister"].submit();
 }
-
-let users;
-fetch('./users-data')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao obter dados dos usuários');
-        }
-        return response.json();
-    })
-    .then(data => {
-        users = data;
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
 const handlePhone = (event) => {
     let input = event.target;
     input.value = phoneMask(input.value);

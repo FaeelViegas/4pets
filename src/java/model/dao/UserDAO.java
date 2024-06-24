@@ -101,7 +101,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching user ID: " + e.getMessage());
+            System.out.println("Erro encontrando id de usuario: " + e.getMessage());
             return -1;
         }
     }

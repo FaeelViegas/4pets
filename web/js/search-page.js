@@ -92,7 +92,7 @@ function loadProducts(products) {
     });
 }
 
-//Acesso aos dados da api que retorna a lista com base no input
+//Requisição que retorna a lista com base no que o usuario digitar na barra de pesquisa
 function getProductDataByName(productSearch) {
     fetch('./search?search=' + productSearch)
         .then(response => {
@@ -108,7 +108,7 @@ function getProductDataByName(productSearch) {
             console.error('Erro:', error);
         });
 }
-
+//Requisição que retorna uma lista com base na categoria
 function getProductDataByCategory(productCategory) {
     fetch('./search?category=' + productCategory)
         .then(response => {

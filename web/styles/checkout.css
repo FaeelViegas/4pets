@@ -417,4 +417,31 @@
     .step.cart i {
         color: rgb(0, 166, 166);
     }
+
+    .cart::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(170, 170, 170);
+        transform: translateX(80%);
+    }
+
+    .payment::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(170, 170, 170);
+        transform: translateX(80%);
+    }
+
+    .confirm::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(170, 170, 170);
+        transform: translateX(80%);
+    }
 }
