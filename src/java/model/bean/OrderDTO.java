@@ -1,7 +1,6 @@
 package model.bean;
 
 import java.io.Serializable;
-import javax.json.JsonString;
 
 public class OrderDTO implements Serializable {
 

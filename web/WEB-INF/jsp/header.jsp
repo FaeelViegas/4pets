@@ -68,8 +68,9 @@
                         </div>
                     </div>
                     <div class="category-header">
+                        <button class="toggle-menu">Categorias</button>
                         <nav>
-                            <ul class="category d-flex">
+                            <ul class="category">
                             </ul>
                         </nav>
                     </div>

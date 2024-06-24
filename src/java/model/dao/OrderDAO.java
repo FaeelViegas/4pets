@@ -105,20 +105,33 @@ public class OrderDAO {
     }
 
     private void insertItensOrder(List<CartDTO> cartItens, int idOrder) {
-        String sql = "INSERT INTO order_product (order_id, product_id, quantity, unitary_value) VALUES (?, ?, ?, ?)";
+        String sqlOrderProduct = "INSERT INTO order_product (order_id, product_id, quantity, unitary_value) VALUES (?, ?, ?, ?)";
+        String sqlUpdateStock = "UPDATE stock SET quantity = quantity - ? WHERE product_id = ?";
+
         try {
             Connection connection = ConnectionDB.connect();
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            connection.setAutoCommit(false);
+
+            PreparedStatement stmtOrderProduct = connection.prepareStatement(sqlOrderProduct);
+            PreparedStatement stmtUpdateStock = connection.prepareStatement(sqlUpdateStock);
 
             for (CartDTO item : cartItens) {
-                stmt.setInt(1, idOrder);
-                stmt.setInt(2, item.getIdProduct());
-                stmt.setInt(3, item.getQuantity());
-                stmt.setDouble(4, item.getPriceUnitary());
-                stmt.executeUpdate();
+                // Update stock
+                stmtUpdateStock.setInt(1, item.getQuantity());
+                stmtUpdateStock.setInt(2, item.getIdProduct());
+                stmtUpdateStock.executeUpdate();
+
+                // Insert order_product
+                stmtOrderProduct.setInt(1, idOrder);
+                stmtOrderProduct.setInt(2, item.getIdProduct());
+                stmtOrderProduct.setInt(3, item.getQuantity());
+                stmtOrderProduct.setDouble(4, item.getPriceUnitary());
+                stmtOrderProduct.executeUpdate();
             }
 
-            stmt.close();
+            connection.commit();  // confirma a transação, fazendo com que as mudanças sejam permanentes
+            stmtOrderProduct.close();
+            stmtUpdateStock.close();
             connection.close();
         } catch (SQLException e) {
             System.out.println("Inserir Itens do Pedido: " + e);

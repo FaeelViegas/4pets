@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.SellerDTO;
-import model.bean.UserDTO;
 
 public class SellerDAO {
 

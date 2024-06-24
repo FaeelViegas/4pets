@@ -180,4 +180,8 @@ background.addEventListener('click', toggleMenu);
 document.addEventListener("DOMContentLoaded", (event) => {
     verifyCartList();
     loadCart();
+
+    document.querySelector('.toggle-menu').addEventListener('click', function () {
+        document.querySelector('.category').classList.toggle('show');
+    });
 });

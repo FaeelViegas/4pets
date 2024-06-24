@@ -84,23 +84,16 @@ setTimeout(() => {
                 },
             },
             {
-                breakpoint: 700,
+                breakpoint: 900,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
                 },
             },
             {
-                breakpoint: 800,
+                breakpoint: 1250,
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 900,
-                settings: {
-                    slidesToShow: 5,
                     slidesToScroll: 1,
                 },
             },
