@@ -14,3 +14,19 @@
         min-height: 600px;
     }
 }
+@media(max-width: 990px) {
+    main {
+        background-color: #F0F0F0;
+    }
+
+    footer {
+        position: relative;
+        z-index: 11;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        min-height: 600px;
+    }
+}
