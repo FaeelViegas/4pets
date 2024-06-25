@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import model.bean.SellerDTO;
 import model.dao.SellerDAO;
 
-@WebServlet(name = "SellerController", urlPatterns = {"/dashboard", "/products", "/register-seller", "/insert-seller", "/sellers-data", "/login-seller-page"})
+@WebServlet(name = "SellerController", urlPatterns = {"/dashboard", "/products", "/register-seller", "/insert-seller", "/sellers-data", "/login-seller-page", "/product-list-seller"})
 public class SellerController extends HttpServlet {
 
     SellerDTO objSeller = new SellerDTO();
@@ -45,8 +45,12 @@ public class SellerController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-            case "/products":
+            case "/product-list-seller": {
+                String path = "/WEB-INF/jsp/dashboard-products.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(path);
+                dispatcher.forward(request, response);
                 break;
+            }
             default:
                 break;
         }

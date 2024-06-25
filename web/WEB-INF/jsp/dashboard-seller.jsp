@@ -50,7 +50,8 @@
                             </div>
                             <!--sub menu da opção projetos do menu lateral-->
                             <ul class="sub-menu">
-                                <li><a href="./products">Produtos</a></li>
+                                <li><a href="./dashboard">Cadastrar Produtos</a></li>
+                                <li><a href="./product-list-seller">Listar Produtos</a></li>
                             </ul>
                         </li>
                         <!--perfil do usuario-->
@@ -64,7 +65,7 @@
                                         <div class="profile_name">${sessionScope.seller}</div>
                                     </div>
                                 </c:when>
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <a href="./logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                             </div>
                         </li>
                     </ul>
@@ -114,7 +115,7 @@
                                 <label for="description" class="form-label">Descrição</label>
                                 <textarea class="form-control" name="description" id="description"
                                     aria-label="With textarea"></textarea>
-                            </div>0
+                            </div>
                             <div id="error-message" class="error text-center"></div>
                             <button type="button" class="btn btn-primary" onclick="validateForm()">ENVIAR</button>
                         </form>

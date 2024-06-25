@@ -52,7 +52,7 @@ public class UserController extends HttpServlet {
             case "/logout": {
                 HttpSession session = request.getSession();
                 session.invalidate();
-                response.sendRedirect(request.getContextPath() + "/login-page");
+                response.sendRedirect("./home");
                 break;
             }
             case "/profile-page": {

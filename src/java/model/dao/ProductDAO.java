@@ -13,10 +13,10 @@ import model.bean.ProductDTO;
 import model.bean.StockDTO;
 
 public class ProductDAO {
-    
+
     ImageDTO objImage = new ImageDTO();
     StockDTO objStock = new StockDTO();
-    
+
     public List<ProductDTO> read() {
         List<ProductDTO> products = new ArrayList<>();
         String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image, s.quantity FROM products p LEFT JOIN images i ON p.id_product = i.product_id LEFT JOIN stock s ON p.id_product = s.product_id;";
@@ -46,9 +46,39 @@ public class ProductDAO {
         }
         return products;
     }
+
+    public List<ProductDTO> readProductSeller(int id) {
+        List<ProductDTO> products = new ArrayList<>();
+        String sql = "SELECT p.id_product, p.name, p.value, c.name AS category_name, s.quantity FROM products p LEFT JOIN stock s ON p.id_product = s.product_id LEFT JOIN categorys c ON p.category_id = c.id_category WHERE p.seller_id = ?;";
+        try {
+            Connection connection = ConnectionDB.connect();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                ProductDTO objProduct = new ProductDTO();
+                objProduct.setIdProduct(rs.getInt("id_product"));
+                objProduct.setName(rs.getString("name"));
+                objProduct.setPrice(rs.getFloat("value"));
+                //categoria do produto
+                objProduct.setDescription(rs.getString("category_name"));
+                objProduct.setQuantity(rs.getInt("quantity"));
+                products.add(objProduct);
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Leitura de produtos: " + e);
+        }
+        return products;
+    }
+
     public List<ProductDTO> readProduct(int id) {
         List<ProductDTO> products = new ArrayList<>();
-        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image FROM products p LEFT JOIN images i ON p.id_product = i.product_id WHERE id_product = ?;";
+        String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image, s.store_name, st.quantity FROM products p LEFT JOIN images i ON p.id_product = i.product_id LEFT JOIN sellers s ON p.seller_id = s.id_seller LEFT JOIN stock st ON p.id_product = st.product_id WHERE p.id_product = ?;";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
@@ -62,8 +92,8 @@ public class ProductDAO {
                 objProduct.setName(rs.getString("name"));
                 objProduct.setPrice(rs.getFloat("value"));
                 objProduct.setDescription(rs.getString("description"));
-                objProduct.setCategoryId(rs.getInt("category_id"));
-                objProduct.setSellerId(rs.getInt("seller_id"));
+                objProduct.setQuantity(rs.getInt("quantity"));
+                objProduct.setStore(rs.getString("store_name"));
                 objProduct.setImage(rs.getBytes("image"));
                 products.add(objProduct);
             }
@@ -75,7 +105,7 @@ public class ProductDAO {
         }
         return products;
     }
-    
+
     public List<ProductDTO> searchProduct(String search) {
         List<ProductDTO> products = new ArrayList<>();
         String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, i.image FROM products p LEFT JOIN images"
@@ -107,7 +137,7 @@ public class ProductDAO {
         }
         return products;
     }
-    
+
     public List<ProductDTO> searchCategory(int category) {
         List<ProductDTO> products = new ArrayList<>();
         String sql = "SELECT p.id_product, p.name, p.description, p.value, p.seller_id, p.category_id, "
@@ -138,20 +168,20 @@ public class ProductDAO {
         }
         return products;
     }
-    
+
     public void insertProduct(ProductDTO objProduct) {
         String sql = "INSERT INTO products (name,description,value,seller_id,category_id) VALUES (?, ?, ?, ?, ?)";
         try {
             Connection connection = ConnectionDB.connect();
             PreparedStatement stmt = null;
-            
+
             stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, objProduct.getName());
             stmt.setString(2, objProduct.getDescription());
             stmt.setDouble(3, objProduct.getPrice());
             stmt.setInt(4, objProduct.getSellerId());
             stmt.setInt(5, objProduct.getCategoryId());
-            
+
             stmt.executeUpdate();
             ResultSet generatedKeys = stmt.getGeneratedKeys();
             int idProduto = -1;
@@ -172,7 +202,7 @@ public class ProductDAO {
             System.out.println("Erro no insert de produto: " + e);
         }
     }
-    
+
     public void insertImageProduct(ImageDTO objImage) {
         try {
             Connection connection = ConnectionDB.connect();
@@ -180,7 +210,7 @@ public class ProductDAO {
             stmt = connection.prepareStatement("INSERT INTO images (image,product_id) VALUES (?, ?)");
             stmt.setBytes(1, objImage.getImage());
             stmt.setInt(2, objImage.getProductId());
-            
+
             stmt.executeUpdate();
             stmt.close();
             connection.close();
@@ -188,7 +218,7 @@ public class ProductDAO {
             System.out.println("Erro no insert de imagem do produto: " + e);
         }
     }
-    
+
     public void insertStockProduct(StockDTO objStock) {
         try {
             Connection connection = ConnectionDB.connect();
@@ -196,7 +226,7 @@ public class ProductDAO {
             stmt = connection.prepareStatement("INSERT INTO stock (quantity ,product_id) VALUES (?, ?)");
             stmt.setInt(1, objStock.getQuantity());
             stmt.setInt(2, objStock.getProductId());
-            
+
             stmt.executeUpdate();
             stmt.close();
             connection.close();

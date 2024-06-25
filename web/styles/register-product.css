@@ -21,9 +21,11 @@ h1 {
 .btn-primary {
     width: 100%;
     margin-top: 20px;
+    background-color: #1B5151;
+    border-color: #1B5151;
 }
+.btn-primary:hover {
+    background-color: #153f3f;
+    border-color: #153f3f;
 
-.error {
-    color: red;
-    font-size: 0.9em;
 }
