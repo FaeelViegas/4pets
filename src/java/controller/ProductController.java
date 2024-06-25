@@ -22,7 +22,7 @@ import model.dao.ProductDAO;
 import model.dao.SellerDAO;
 
 @MultipartConfig
-@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product", "/product", "/product-item"})
+@WebServlet(name = "ProductController", urlPatterns = {"/search-product", "/search", "/list-categorys", "/list-products", "/insert-product", "/product", "/product-item", "/get-products-seller"})
 public class ProductController extends HttpServlet {
 
     Gson gson = new Gson();
@@ -85,6 +85,16 @@ public class ProductController extends HttpServlet {
         } else if (url.equals("/product-item")) {
             int idProduct = Integer.parseInt(request.getParameter("id"));
             List<ProductDTO> products = objProductDao.readProduct(idProduct);
+
+            String json = gson.toJson(products);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        } else if (url.equals("/get-products-seller")) {
+            HttpSession session = request.getSession(false);
+            String seller = (String) session.getAttribute("seller");
+            int id = objSellerDao.returnSellerId(seller);
+            List<ProductDTO> products = objProductDao.readProductSeller(id);
 
             String json = gson.toJson(products);
             response.setContentType("application/json");

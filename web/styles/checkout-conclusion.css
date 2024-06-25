@@ -187,3 +187,193 @@
         color: rgb(0, 166, 166);
     }
 }
+
+@media(max-width: 990px) {
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        background-color: #F0F0F0;
+    }
+
+    footer a {
+        text-decoration: none;
+    }
+
+    .logo-container img {
+        object-fit: cover;
+        height: 50px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .container {
+        max-width: 800px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h1 {
+        color: #28a745;
+    }
+
+    p {
+        color: #666;
+    }
+
+    .order-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .qr-code {
+        flex: 1;
+        text-align: center;
+        position: relative;
+    }
+
+    .qr-code img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .copy-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: rgb(0, 166, 166);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .copy-button:hover {
+        background-color: rgb(0, 134, 134);
+    }
+
+    .order-info {
+        flex: 2;
+        text-align: center;
+        padding-left: 20px;
+    }
+
+    .validity {
+        background-color: #fff3e0;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        color: #ff6f00;
+    }
+
+    .order-number h2 {
+        color: #333;
+        font-size: 24px;
+    }
+
+    .payment-instructions {
+        margin-top: 30px;
+        text-align: left;
+    }
+
+    .actions {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .home-button:hover {
+        background-color: rgb(0, 166, 166);
+        color: #ffffff;
+    }
+
+    .home-button {
+        border: 1px solid rgb(0, 166, 166);
+        background-color: #ffffff;
+        color: rgb(0, 166, 166);
+    }
+
+    .orders-button {
+        background-color: rgb(0, 166, 166);
+    }
+
+    .orders-button:hover {
+        background-color: rgb(0, 146, 146);
+    }
+
+    .step.payment .text {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.payment i {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.cart .text {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.cart i {
+        color: rgb(0, 166, 166);
+    }
+
+    .cart::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(0, 166, 166);
+        transform: translateX(80%);
+    }
+
+    .payment::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(0, 166, 166);
+        transform: translateX(80%);
+    }
+
+    .confirm::after {
+        position: absolute;
+        content: '';
+        width: 60%;
+        height: 1px;
+        background-color: rgb(0, 166, 166);
+        transform: translateX(80%);
+    }
+
+    .step.confirm .text {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.confirm i {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.conclusion .text {
+        color: rgb(0, 166, 166);
+    }
+
+    .step.conclusion i {
+        color: rgb(0, 166, 166);
+    }
+}

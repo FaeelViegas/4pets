@@ -11,11 +11,12 @@ public class ProductDTO {
     private byte[] image;
     private int quantity;
     private int orderId;
+    private String store;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int idProduct, int categoryId, int sellerId, String name, double price, String description, byte[] image, int quantity, int orderId) {
+    public ProductDTO(int idProduct, int categoryId, int sellerId, String name, double price, String description, byte[] image, int quantity, int orderId, String store) {
         this.idProduct = idProduct;
         this.categoryId = categoryId;
         this.sellerId = sellerId;
@@ -25,6 +26,7 @@ public class ProductDTO {
         this.image = image;
         this.quantity = quantity;
         this.orderId = orderId;
+        this.store = store;
     }
 
     public int getIdProduct() {
@@ -99,4 +101,11 @@ public class ProductDTO {
         this.orderId = orderId;
     }
 
+    public String getStore() {
+        return store;
+    }
+
+    public void setStore(String store) {
+        this.store = store;
+    }
 }
