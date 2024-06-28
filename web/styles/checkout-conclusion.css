@@ -376,4 +376,8 @@
     .step.conclusion i {
         color: rgb(0, 166, 166);
     }
+
+    .progress-container {
+        visibility: hidden;
+    }
 }

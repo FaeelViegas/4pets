@@ -270,6 +270,7 @@
         transform: translateX(80%);
     }
 }
+
 @media(max-width:990px) {
     main {
         background-color: #F0F0F0;
@@ -312,9 +313,8 @@
     }
 
     .container {
-        display: grid;
-        grid-template-columns: 70% 1fr;
-        grid-template-rows: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 30px;
     }
 
@@ -540,5 +540,9 @@
         height: 1px;
         background-color: rgb(170, 170, 170);
         transform: translateX(80%);
+    }
+
+    .progress-container {
+        visibility: hidden;
     }
 }

@@ -142,7 +142,8 @@
         font-size: 25px;
         color: rgb(0, 196, 196);
     }
-    .header-container h2{
+
+    .header-container h2 {
         color: #1B5151;
         font-weight: 500;
     }
@@ -163,8 +164,8 @@
     }
 
     .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         justify-items: center;
         padding-bottom: 5%;
     }
@@ -292,7 +293,8 @@
         font-size: 25px;
         color: rgb(0, 196, 196);
     }
-    .header-container h2{
+
+    .header-container h2 {
         color: #1B5151;
         font-weight: 500;
     }

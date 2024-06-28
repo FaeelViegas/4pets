@@ -9,6 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="./styles/toast.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./styles/cardProduct.css">
         <link rel="stylesheet" href="./styles/home.css">
@@ -18,6 +19,7 @@
     <body>
         <%@include file="header.jsp" %>
             <main>
+                <div class="notifications"></div>
                 <section class="products-4pets">
                     <h2 class="title-carousel">Produtos que você encontra na 4Pets!</h2>
                     <div class="c-carousel c-carousel--products">
@@ -90,5 +92,6 @@
     <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
     <script src="./js/home.js"></script>
     <script src="./js/carousel.js"></script>
+    <script src="./js/toast.js"></script>
 
     </html>

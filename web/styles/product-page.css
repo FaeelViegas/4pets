@@ -126,7 +126,7 @@
         padding: 0 10px;
     }
 
-    .section-content pre{
+    .section-content pre {
         white-space: pre-wrap;
         font-family: sans-serif;
     }
@@ -160,9 +160,8 @@
     }
 
     .container {
-        display: grid;
-        grid-template-columns: 70% 1fr;
-        grid-template-rows: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 30px;
     }
 
@@ -282,7 +281,7 @@
         padding: 0 10px;
     }
 
-    .section-content pre{
+    .section-content pre {
         white-space: pre-wrap;
         font-family: sans-serif;
     }

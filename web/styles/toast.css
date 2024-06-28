@@ -16,7 +16,7 @@
     border-radius: 5px;
     --color: #0abf30;
     background-image:
-        linear-gradient(to right, #0abf3055, #22242f 30%);
+        linear-gradient(to right, #0abf3055, #ffffff 30%);
     animation: show 0.3s ease 1 forwards
 }
 

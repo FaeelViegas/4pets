@@ -3,6 +3,7 @@
     <html lang="pt-br">
 
     <head>
+        <link rel="stylesheet" href="./styles/toast.css">
         <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
         <script src="https://kit.fontawesome.com/52a6b206fa.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,6 +17,7 @@
     <body>
         <%@include file="header.jsp" %>
             <main>
+                <div class="notifications"></div>
             </main>
             <%@include file="footer.jsp" %>
     </body>
@@ -29,5 +31,6 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="./js/product-page.js"></script>
+    <script src="./js/toast.js"></script>
 
     </html>

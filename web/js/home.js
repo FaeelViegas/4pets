@@ -62,6 +62,7 @@ function addToCart(productId, productName, productPrice, productImage, stock) {
         })
         .then(data => {
             loadCartProduct(data);
+            successToast(text = 'Produto adicionado ao carrinho!');
         })
         .catch(error => {
             console.error('Erro:', error);

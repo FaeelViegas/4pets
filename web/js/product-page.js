@@ -101,6 +101,7 @@ function addToCart(productId, productName, productPrice, productImage, stock) {
                 throw new Error('Erro na solicitação: ' + response.status);
             }
             loadCart();
+            successToast(text = 'Produto adicionado ao carrinho!');
             return response.json();
         })
         .then(data => {
