@@ -49,6 +49,9 @@
                         <div class="d-flex justify-content-center">
                             <input type="button" class="button-enter btn btn-dark" value="ENTRAR" onclick="validate()">
                         </div>
+                        <div class="redirect-cont">
+                            <span>Não possui cadastro? <a href="./register-seller">cadastre-se</a></span>
+                        </div>
                     </form>
                 </div>
             </div>

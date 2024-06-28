@@ -1,0 +1,10 @@
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    min-width: 700px;
+    width: 100%;
+    border-collapse: collapse;
+}

@@ -49,7 +49,9 @@
                         <div class="d-flex justify-content-center">
                             <input type="button" class="button-enter btn btn-dark" value="ENTRAR" onclick="validate()">
                         </div>
-                        <span>Não possui cadastro? <a href="./register-page">cadastre-se</a></span>
+                        <div class="redirect-cont">
+                            <span>Não possui cadastro? <a href="./register-page">cadastre-se</a></span>
+                        </div>
                         <div class="btn-login">
                             <a href="#" class="btn-google btn btn-dark"><i class="fa-brands fa-google"></i></a>
                             <a href="#" class="btn-face btn btn-dark"><i class="fa-brands fa-facebook"></i></a>

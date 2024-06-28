@@ -16,11 +16,14 @@
 
     <body>
         <header>
-            <div class="header-container">
+            <div class="header-container d-flex justify-content-between">
                 <div class="logo-container">
                     <a href="./home">
                         <img src="./assets/logo-header.png" alt="logo">
                     </a>
+                </div>
+                <div class=" d-flex justify-content-center">
+                    <a class="d-flex align-items-center" href="./home"><i class="fa-solid fa-house"></i></a>
                 </div>
             </div>
         </header>

@@ -2,6 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const productSearch = urlParams.get('search');
 const productCategory = urlParams.get('category');
 const searchText = document.querySelector('#search-text');
+const resultText = document.querySelector('#result-text');
 
 function createProductCard(product) {
     const card = document.createElement('div');
@@ -40,7 +41,7 @@ function arrayBufferToBase64(buffer) {
     return window.btoa(binary);
 }
 
-function addToCart(productId, productName, productPrice, productImage,stock) {
+function addToCart(productId, productName, productPrice, productImage, stock) {
     const data = {
         productId: productId,
         productName: productName,
@@ -129,4 +130,5 @@ if (productSearch !== "") {
     searchText.textContent = productSearch;
 } else {
     getProductDataByCategory(productCategory);
+    resultText.textContent = "Resultados";
 }

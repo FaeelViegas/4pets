@@ -12,6 +12,7 @@
         <title>Produtos</title>
         <link rel="stylesheet" href="./styles/toast.css">
         <link rel="stylesheet" href="./styles/sidebar-seller.css">
+        <link rel="stylesheet" href="./styles/dashboard-products.css">
     </head>
 
     <body>
@@ -75,19 +76,22 @@
                 <!--conteudo da pagina-->
                 <div class="container m-5">
                     <h1>Produtos Cadastrados</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Valor</th>
-                                <th scope="col">Categoria</th>
-                                <th scope="col">Estoque</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Estoque</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
         </main>

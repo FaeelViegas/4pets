@@ -15,6 +15,15 @@
         height: 100px;
     }
 
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
+    }
+
     .container {
         display: flex;
         justify-content: center;
@@ -92,6 +101,7 @@
         border-color: rgb(226, 36, 36);
     }
 }
+
 @media(max-width:990px) {
     h1 {
         text-align: center;
@@ -109,10 +119,19 @@
         height: 100px;
     }
 
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
+    }
+
     .container {
         display: flex;
         justify-content: center;
-        height: 100vh;
+        height: 900px;
         width: 100vw;
     }
 
@@ -184,5 +203,10 @@
     .btn-google:hover {
         background-color: rgb(226, 36, 36);
         border-color: rgb(226, 36, 36);
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
     }
 }

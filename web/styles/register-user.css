@@ -11,6 +11,15 @@
         color: #1B5151;
     }
 
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
+    }
+
     .image-home {
         display: flex;
         justify-content: center;
@@ -111,6 +120,15 @@
         justify-content: center;
     }
 
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
+    }
+
     .image-home img {
         object-fit: cover;
         height: 100px;
@@ -119,7 +137,7 @@
     .container {
         display: flex;
         justify-content: center;
-        height: 100vh;
+        height: 900px;
         width: 100vw;
     }
 
@@ -191,5 +209,10 @@
     .btn-google:hover {
         background-color: rgb(226, 36, 36);
         border-color: rgb(226, 36, 36);
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
     }
 }

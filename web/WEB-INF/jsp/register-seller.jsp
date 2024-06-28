@@ -80,6 +80,9 @@
                     <div class="btn-confirm">
                         <input class="btn btn-dark" type="button" value="Cadastrar" onclick="validateSeller()">
                     </div>
+                    <div class="redirect-cont">
+                        <span>Ja possui cadastro? <a href="./login-seller-page">Entre</a></span>
+                    </div>
                 </form>
             </section>
         </main>

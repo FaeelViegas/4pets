@@ -73,7 +73,9 @@
                     <div class="btn-confirm">
                         <input class="btn btn-dark" type="button" value="Cadastrar" onclick="validate()">
                     </div>
-                    <span>Ja possui cadastro? <a href="./login-page">Entre</a></span>
+                    <div class="redirect-cont">
+                        <span>Ja possui cadastro? <a href="./login-page">Entre</a></span>
+                    </div>
                 </form>
             </section>
         </main>

@@ -9,6 +9,15 @@
         color: #1B5151;
     }
 
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
+    }
+
     .image-home {
         display: flex;
         justify-content: center;
@@ -98,6 +107,7 @@
         border-color: rgb(226, 36, 36);
     }
 }
+
 @media(max-width:990px) {
     h1 {
         color: #1B5151;
@@ -190,5 +200,13 @@
     .btn-google:hover {
         background-color: rgb(226, 36, 36);
         border-color: rgb(226, 36, 36);
+    }
+
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        color: #1b515180;
     }
 }

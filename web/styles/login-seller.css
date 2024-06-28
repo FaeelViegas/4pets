@@ -13,6 +13,15 @@
         height: 100px;
     }
 
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
+    }
+
     .container-box {
         margin-top: 10%;
         margin-bottom: 10%;
@@ -125,9 +134,18 @@
     }
 
     .container-image {
-        display: flex;
+        display: none;
         justify-content: center;
         border-right: 1px solid rgba(110, 110, 110, 0.616);
+    }
+
+    .redirect-cont a {
+        color: #1B5151;
+    }
+
+    .redirect-cont span {
+        margin-left: 3%;
+        color: #1b515180;
     }
 
     .container-image img {
